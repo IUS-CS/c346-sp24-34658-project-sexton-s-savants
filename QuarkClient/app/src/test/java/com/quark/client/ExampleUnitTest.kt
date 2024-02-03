@@ -1,4 +1,4 @@
-package com.example.quarkclient
+package com.quark.client
 
 import org.junit.Test
 
