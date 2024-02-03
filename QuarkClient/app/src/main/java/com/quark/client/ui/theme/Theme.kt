@@ -1,4 +1,4 @@
-package com.example.quarkclient.ui.theme
+package com.quark.client.ui.theme
 
 import android.app.Activity
 import android.os.Build

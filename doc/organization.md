@@ -1,8 +1,14 @@
-You should have an organization/roles document that describes accurately 
-what each member will contribute. This is a short document, but you may 
-write any details necessary.
+# Organization
+## Roles
 
-Doran Martin - role1
-Jay Chandiramani - role2
-Logan Combs - role3
-Andrew Collins - role4
+### Doran Martin 
+Encryption Developer
+
+### Jay Chandiramani 
+Product Owner, General Developer 
+
+### Logan Combs 
+Scrum Master, General Developer
+
+### Andrew Collins
+Lead Developer

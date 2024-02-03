@@ -1,4 +1,4 @@
-package com.example.quarkclient.ui.theme
+package com.quark.client.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

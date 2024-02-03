@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.quarkclient"
+    namespace = "com.quark.client"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.quarkclient"
+        applicationId = "com.quark.client"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.cucumber.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
