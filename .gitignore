@@ -31,7 +31,8 @@ render.experimental.xml
 *.keystore
 
 # Google Services (e.g. APIs or Firebase)
-google-services.json
+# google-services.json
+# google services keys are public anyway
 
 # Android Profiling
 *.hprof
