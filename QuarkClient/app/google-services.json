@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "628740349000",
+    "project_id": "quark-e1efa",
+    "storage_bucket": "quark-e1efa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628740349000:android:576b5f9b54f2fa9f080c7d",
+        "android_client_info": {
+          "package_name": "com.quark.client"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAN9sUN6h-uT7fOPiAGuy0b9By-hLf0r9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
