@@ -8,7 +8,32 @@ For a compiled APK, see [releases](https://github.com/IUS-CS/c346-sp24-34658-pro
 
 ## Building from source
 
-How to setup 
+Using [Android Studio](https://developer.android.com/studio) is highly recommended for any Android development.
+
+Use 
+
+    ./gradlew assembleDebug 
+or 
+
+    .\gradlew.bat assembleDebug
+
+in the root of the project to build an APK from the command line. You can also deploy to an Android device or emulator from the command line, using
+
+    ./gradlew installDebug
+See [here](https://developer.android.com/build/building-cmdline) for more info.
+
+## Testing
+
+Again, tests are best ran in Android Studio, but it is possible using the command line.
+
+If using the commandline, there are two commands to use.
+
+For on-device-testing, use:
+
+	./gradlew connectedAndroidTest
+For developer-side testing, use:
+
+    ./gradlew test
 
 ## Contributing
 
@@ -19,4 +44,4 @@ Please make sure to update tests as appropriate.
 
 ## License
 
-[MIT](./LICENSE)
+[GPL-3.0](./LICENSE)
