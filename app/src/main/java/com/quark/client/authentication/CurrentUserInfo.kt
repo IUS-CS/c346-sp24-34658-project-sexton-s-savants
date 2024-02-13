@@ -8,6 +8,8 @@ import com.google.firebase.auth.FirebaseUser
  *
  * Authenticates using `FirebaseAuth` with email/password.
  */
+
+//TODO use this class for future integration
 class CurrentUserInfo(
     private val auth: FirebaseAuth
 
