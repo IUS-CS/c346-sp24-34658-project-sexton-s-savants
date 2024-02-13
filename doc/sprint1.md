@@ -8,7 +8,7 @@ Members present:
 * Jay Chandiramani
 * Logan Combs
 * Andrew Collins
-  
+
 ## Demo
 
 This sprint, we completed:
@@ -22,7 +22,9 @@ This sprint, we completed:
 
 Here are screenshots of what we did:
 
-![Thing](/docs/images/screenshot1.png?raw=true)
+![Login Page](/docs/images/screenie1.png?raw=true)
+
+![Home page](/docs/images/screenie2.png?raw=true)
 
 ## Retro
 
