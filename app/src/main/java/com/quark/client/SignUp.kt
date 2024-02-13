@@ -1,6 +1,5 @@
 package com.quark.client
 
-import android.app.AlertDialog
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
@@ -18,12 +17,10 @@ import androidx.navigation.NavController
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.quark.client.authentication.EmailAuth
-
-import android.content.Context
 import androidx.compose.ui.platform.LocalContext
 
 @Composable
-fun Login(navController: NavController) {
+fun SignUp(navController: NavController) {
     val context = LocalContext.current
 
     var email by remember {
@@ -38,7 +35,7 @@ fun Login(navController: NavController) {
     ) {
         Text(
             fontSize = 20.sp,
-            text = "Login Page"
+            text = "SignUp Page"
         )
         OutlinedTextField(
             value = email,
@@ -60,34 +57,29 @@ fun Login(navController: NavController) {
                     text -> password = text
             })
         Button(onClick = {
-            //Code authenticates user trying to log in.
+            //Code validates and creates a user. gives error is user exists
             val auth = EmailAuth(Firebase.auth)
 
-            auth.authenticateUser(email, password){
-                if (it == "Authenticated User")
-                    navController.navigate(Screen.Home.route)
-                else if (it == "Failed"){
-                    showErrorDialog(context, "Please check the entered fields.")
-                }
-            }
+            if(EmailAuth.validateEmail(email)) {
 
-        }) {
-            Text("Login")
-        }
-        Button(onClick = {
-            navController.navigate(Screen.SignUp.route)
+                auth.createUser(email, password) {
+                    if (it == "Created User"){
+                        navController.navigate(Screen.Login.route)
+                    }
+                    else if (it == "Failed")
+                        showErrorDialog(context, "$email is already in use.")
+                }
+            } else
+                showErrorDialog(context, "$email is formatted incorrectly.\nFormat: Sexton@iu.edu")
+
         }) {
             Text("Sign Up")
         }
-    }
-}
-
-fun showErrorDialog(context: Context, message: String) {
-    AlertDialog.Builder(context)
-        .setTitle("Error")
-        .setMessage(message)
-        .setPositiveButton(android.R.string.ok) { dialog, _ ->
-            dialog.dismiss()
+        Button(onClick = {
+            //Code returns to login page
+            navController.navigate(Screen.Login.route)
+        }) {
+            Text("Cancel")
         }
-        .show()
+    }
 }

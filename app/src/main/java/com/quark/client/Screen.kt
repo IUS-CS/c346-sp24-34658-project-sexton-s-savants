@@ -6,8 +6,9 @@ package com.quark.client
  * Provides various screens as child objects with specific routes, as well as a method to pass args.
  */
 sealed class Screen(val route: String) {
-    object Login : Screen("login")
-    object Home : Screen("home")
+    data object Login : Screen("login")
+    data object Home : Screen("home")
+    data object SignUp : Screen("signup")
 
     /**
      * Appends arguments to route
