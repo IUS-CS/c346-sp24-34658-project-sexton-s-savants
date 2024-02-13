@@ -10,14 +10,24 @@ import com.google.firebase.auth.FirebaseAuth
 class EmailAuth(
     private val auth: FirebaseAuth
 ) {
-    fun createUser(email: String, password: String, onResult: (Throwable?) -> Unit) {
+    fun createUser(email: String, password: String, onResult: (String) -> Unit) {
       auth.createUserWithEmailAndPassword(email, password)
-          .addOnCompleteListener { onResult(it.exception) }
+          .addOnCompleteListener {task ->
+              if(task.isSuccessful)
+                  onResult("Created User")
+              else
+                  onResult("Failed")
+          }
     }
 
-    fun authenticateUser(email: String, password: String, onResult: (Throwable?) -> Unit) {
+    fun authenticateUser(email: String, password: String, onResult: (String) -> Unit) {
         auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { onResult(it.exception) }
+            .addOnCompleteListener {task ->
+                if(task.isSuccessful)
+                    onResult("Authenticated User")
+                else
+                    onResult("Failed")
+            }
     }
 
     companion object {
@@ -29,5 +39,8 @@ class EmailAuth(
         fun validateEmail(email: String): Boolean {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
         }
+
+        private const val TAG = "EmailPassword"
+
     }
 }
