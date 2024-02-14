@@ -15,8 +15,8 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.QuarkClient">
+            android:label = "QuarkClient"
+            android:theme="@style/Theme.QuarkClient.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
