@@ -1,4 +1,4 @@
-package com.quark.client
+package com.quark.client.navigation
 
 /**
  * A list of screens

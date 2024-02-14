@@ -10,23 +10,39 @@ import com.google.firebase.auth.FirebaseAuth
 class EmailAuth(
     private val auth: FirebaseAuth
 ) {
-    fun createUser(email: String, password: String, onResult: (String) -> Unit) {
+    /**
+     * Creates a new user with the provided email and password.
+     * @param email the provided email address.
+     * @param password the provided password.
+     * @param onResult the callback to be called when the operation is complete.
+     * onResult will be called with `AuthResult.Success` if the operation was successful, and `AuthResult.Failure` otherwise.
+     */
+    fun createUser(email: String, password: String, onResult: (AuthResult) -> Unit) {
       auth.createUserWithEmailAndPassword(email, password)
           .addOnCompleteListener {task ->
-              if(task.isSuccessful)
-                  onResult("Created User")
-              else
-                  onResult("Failed")
+              if(task.isSuccessful) {
+                  onResult(AuthResult.Success)
+              } else {
+                  onResult(AuthResult.Failure)
+              }
           }
     }
 
-    fun authenticateUser(email: String, password: String, onResult: (String) -> Unit) {
+    /**
+     * Authenticates a user with the provided email and password.
+     * @param email the provided email address.
+     * @param password the provided password.
+     * @param onResult the callback to be called when the operation is complete.
+     * onResult will be called with `AuthResult.Success` if the operation was successful, and `AuthResult.Failure` otherwise.
+     */
+    fun authenticateUser(email: String, password: String, onResult: (AuthResult) -> Unit) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {task ->
-                if(task.isSuccessful)
-                    onResult("Authenticated User")
-                else
-                    onResult("Failed")
+                if(task.isSuccessful) {
+                    onResult(AuthResult.Success)
+                } else {
+                    onResult(AuthResult.Failure)
+                }
             }
     }
 
@@ -39,8 +55,10 @@ class EmailAuth(
         fun validateEmail(email: String): Boolean {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
         }
-
-        private const val TAG = "EmailPassword"
-
     }
+}
+
+enum class AuthResult {
+    Success,
+    Failure
 }
