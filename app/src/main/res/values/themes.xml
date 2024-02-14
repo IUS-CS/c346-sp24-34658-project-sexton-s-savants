@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="Theme.QuarkClient" parent="android:Theme.Material.Light.NoActionBar"/>
 
-    <style name="Theme.QuarkClient" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.QuarkClient.SplashScreen" parent="Theme.SplashScreen" >
+        <item name="windowSplashScreenBackground">#174A6D</item>
+        <item name="postSplashScreenTheme">@style/Theme.QuarkClient</item>
+    </style>
 </resources>
