@@ -1,4 +1,4 @@
-package com.quark.client
+package com.quark.client.pages
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,13 +14,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
 import com.quark.client.authentication.EmailAuth
 import androidx.compose.ui.platform.LocalContext
+import com.quark.client.navigation.Screen
+import com.quark.client.authentication.AuthResult
+import com.quark.client.components.showErrorDialog
 
 @Composable
-fun SignUp(navController: NavController) {
+fun SignUp(navController: NavController, auth: EmailAuth) {
     val context = LocalContext.current
 
     var email by remember {
@@ -35,7 +36,7 @@ fun SignUp(navController: NavController) {
     ) {
         Text(
             fontSize = 20.sp,
-            text = "SignUp Page"
+            text = "Sign Up Page"
         )
         OutlinedTextField(
             value = email,
@@ -58,20 +59,17 @@ fun SignUp(navController: NavController) {
             })
         Button(onClick = {
             //Code validates and creates a user. gives error is user exists
-            val auth = EmailAuth(Firebase.auth)
-
-            if(EmailAuth.validateEmail(email)) {
-
-                auth.createUser(email, password) {
-                    if (it == "Created User"){
-                        navController.navigate(Screen.Login.route)
-                    }
-                    else if (it == "Failed")
-                        showErrorDialog(context, "$email is already in use.")
-                }
-            } else
+            if(!EmailAuth.validateEmail(email)) {
                 showErrorDialog(context, "$email is formatted incorrectly.\nFormat: Sexton@iu.edu")
+            }
 
+            auth.createUser(email, password) {
+                if (it == AuthResult.Success){
+                    navController.navigate(Screen.Login.route)
+                } else {
+                    showErrorDialog(context, "$email is already in use.")
+                }
+            }
         }) {
             Text("Sign Up")
         }

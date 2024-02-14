@@ -1,4 +1,4 @@
-package com.quark.client
+package com.quark.client.pages
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -28,7 +28,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.quark.client.navigation.Screen
 
+@Composable
+fun Home(navController: NavController) {
+    AppBar(navController)
+}
 @Composable
 fun AppBar(navController: NavController) {
     Surface(
@@ -114,9 +119,4 @@ fun ScrollContent(innerPadding: PaddingValues) {
             }
         }
     }
-}
-
-@Composable
-fun Home(navController: NavController) {
-    AppBar(navController)
 }
