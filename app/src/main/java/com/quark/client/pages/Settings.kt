@@ -5,22 +5,17 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Send
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
@@ -28,28 +23,25 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.quark.client.database.Users
+import com.quark.client.authentication.EmailAuth
 import com.quark.client.navigation.Screen
 
-data class HomeProps(
+data class SettingsProps(
     val navController: NavController,
-    val users: Users,
-    val userId: String
+    val auth: EmailAuth
 )
 
 @Composable
-fun Home(props: HomeProps) {
+fun Settings(props: SettingsProps) {
     AppBar(props)
 }
 @Composable
-fun AppBar(props: HomeProps) {
+fun AppBar(props: SettingsProps) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -60,17 +52,7 @@ fun AppBar(props: HomeProps) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CenterAlignedTopAppBar(props: HomeProps) {
-    var username by remember {
-        mutableStateOf("")
-    }
-
-    LaunchedEffect(key1 = props.userId) {
-        props.users.getUserById(props.userId)?.let { user ->
-            username = user.username
-        }
-    }
-
+fun CenterAlignedTopAppBar(props: SettingsProps) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     var expanded by remember { mutableStateOf(false) }
 
@@ -78,24 +60,24 @@ fun CenterAlignedTopAppBar(props: HomeProps) {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
 
         topBar = {
-            CenterAlignedTopAppBar(
+            androidx.compose.material3.CenterAlignedTopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.primary,
                 ),
                 title = {
                     Text(
-                        "Welcome, $username, to QUARK",
+                        "Settings",
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-                        props.navController.navigate(Screen.Login.route)}) {
+                        props.navController.navigate(Screen.Home.route)}) {
                         Icon(
-                            imageVector = Icons.Filled.ExitToApp,
-                            contentDescription = "Sign Out"
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = "Back to Home"
                         )
                     }
                 },
@@ -104,6 +86,12 @@ fun CenterAlignedTopAppBar(props: HomeProps) {
                         Icon(imageVector = Icons.Filled.Menu, contentDescription = "Open menu")
                     }
                     DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
+                        DropdownMenuItem(
+                            text = { Text("Chats") },
+                            onClick = {
+                                expanded = false
+                                props.navController.navigate(Screen.Home.route)
+                            })
                         DropdownMenuItem(
                             text = { Text("Profile") },
                             onClick = {
@@ -116,34 +104,17 @@ fun CenterAlignedTopAppBar(props: HomeProps) {
                                 expanded = false
                                 props.navController.navigate(Screen.Contacts.route)
                             })
-                        DropdownMenuItem(
-                            text = { Text("Settings") },
-                            onClick = {
-                                expanded = false
-                                props.navController.navigate(Screen.Settings.route)
-                            })
                     }
                 }
             )
-        },
-
-        floatingActionButton = {
-            LargeFloatingActionButton(
-                //TODO add functionality to create new chat here
-                onClick = {/*add code to create new chat here*/},
-                shape = CircleShape
-            ) {
-                Icon(Icons.Filled.Send, "Create new chat.")
-            }
         }
     ) { innerPadding ->
-        ScrollContent(innerPadding, props)
+        SettingsScroll(innerPadding)
     }
 }
 
 @Composable
-fun ScrollContent(innerPadding: PaddingValues, props: HomeProps) {
-    val range = 1..100
+private fun SettingsScroll(innerPadding: PaddingValues) {
 
     LazyColumn(
         modifier = Modifier
@@ -151,12 +122,6 @@ fun ScrollContent(innerPadding: PaddingValues, props: HomeProps) {
         contentPadding = innerPadding,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        items(range.count()) { index ->
-            TextButton(onClick = {
-                props.navController.navigate(Screen.Chat.withArgs(index.toString()))
-            }) {
-                Text(text = "- Chat ${index + 1}", fontSize = 30.sp)
-            }
-        }
+
     }
 }

@@ -2,6 +2,7 @@ package com.quark.client.authentication
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import java.util.regex.Pattern
 
 /**
  * The email authentication service.
@@ -64,6 +65,25 @@ class EmailAuth(
          */
         fun validateEmail(email: String): Boolean {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        }
+
+        /**
+         * Checks if provided password meets requirements
+         * @param password the provided password.
+         * @return boolean indicating password validity
+         */
+        fun validatePasswordStrength (password: String): Boolean{
+            val lengthRegex = ".{8,}" // at least 8 characters
+            val upperCaseRegex = ".*[A-Z].*" // at least one uppercase
+            val lowerCaseRegex = ".*[a-z].*" // at least one lowercase
+            val numberRegex = ".*\\d.*" // at least one number
+            val specialCharRegex = ".*[!@#\$%^&*].*" // at least one special character
+
+            return Pattern.matches(lengthRegex, password) &&
+                    Pattern.matches(upperCaseRegex, password) &&
+                    Pattern.matches(lowerCaseRegex, password) &&
+                    Pattern.matches(numberRegex, password) &&
+                    Pattern.matches(specialCharRegex, password)
         }
     }
 }

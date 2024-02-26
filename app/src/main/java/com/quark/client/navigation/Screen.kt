@@ -10,6 +10,8 @@ sealed class Screen(val route: String) {
     data object Home : Screen("home")
     data object SignUp : Screen("signup")
     data object Chat : Screen("chat")
+    data object Contacts : Screen("contacts")
+    data object Settings : Screen("settings")
 
     /**
      * Appends arguments to route

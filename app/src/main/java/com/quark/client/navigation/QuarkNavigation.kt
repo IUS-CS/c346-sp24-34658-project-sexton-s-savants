@@ -18,6 +18,10 @@ import com.quark.client.pages.Home
 import com.quark.client.pages.HomeProps
 import com.quark.client.pages.Login
 import com.quark.client.pages.SignUp
+import com.quark.client.pages.Contacts
+import com.quark.client.pages.ContactsProps
+import com.quark.client.pages.Settings
+import com.quark.client.pages.SettingsProps
 
 /**
  * Handles Quark's page navigation
@@ -60,6 +64,20 @@ fun QuarkNavigation() {
                     auth.getCurrentUser()?.uid!!,
                     entry.arguments?.getString("chatId")!!
                 )
+            )
+        }
+        composable(
+            route = Screen.Contacts.route,
+        ) {
+            Contacts(
+                ContactsProps(navController, auth)
+            )
+        }
+        composable(
+            route = Screen.Settings.route,
+        ) {
+            Settings(
+                SettingsProps(navController, auth)
             )
         }
     }

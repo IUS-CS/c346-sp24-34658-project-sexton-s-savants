@@ -1,6 +1,5 @@
 package com.quark.client.pages
 
-import android.app.AlertDialog
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
@@ -16,7 +15,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.quark.client.authentication.EmailAuth
-import android.content.Context
 import androidx.compose.ui.platform.LocalContext
 import com.quark.client.navigation.Screen
 import com.quark.client.authentication.AuthResult
@@ -61,15 +59,15 @@ fun Login(navController: NavController, auth: EmailAuth) {
             })
         Button(onClick = {
             //Code authenticates user trying to log in.
-            if(!EmailAuth.validateEmail(email)) {
-                showErrorDialog(context, "$email is formatted incorrectly.\nFormat: Sexton@iu.edu")
-            }
-
-            auth.authenticateUser(email, password){
-                if (it == AuthResult.Success) {
-                    navController.navigate(Screen.Home.route)
-                } else if (it == AuthResult.Failure){
-                    showErrorDialog(context, "Please check the entered fields.")
+            if((email.isEmpty() || !EmailAuth.validateEmail(email)) || password.isEmpty()) {
+                showErrorDialog(context, "Please enter all fields correctly.")
+            }else{
+                auth.authenticateUser(email, password){
+                    if (it == AuthResult.Success) {
+                        navController.navigate(Screen.Home.route)
+                    } else if (it == AuthResult.Failure){
+                        showErrorDialog(context, "Please check the entered credentials.")
+                    }
                 }
             }
 
