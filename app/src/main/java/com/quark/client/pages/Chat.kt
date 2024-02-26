@@ -13,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.quark.client.database.Messages
@@ -22,8 +23,9 @@ import com.quark.client.navigation.Screen
 
 data class ChatProps(
     val messages: Messages,
-    val userId: String,
-    val chatId: String,
+    val toId: String,  // todo: better names for these two
+    val fromId: String,
+    val fromUsername: String,
 )
 
 @Composable
@@ -32,8 +34,8 @@ fun Chat(props: ChatProps) {
         mutableStateOf<List<QuarkMessage>>(emptyList())
     }
 
-    LaunchedEffect(key1 = props.chatId) {
-        messages = props.messages.getMessagesByUserTo(props.userId)
+    LaunchedEffect(key1 = props.fromId) {
+        messages = props.messages.getMessagesToFrom(props.toId, props.fromId)
     }
 
     LazyColumn(
@@ -43,12 +45,12 @@ fun Chat(props: ChatProps) {
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         item {
-            Text("Chat Page number ${props.chatId}")
+            Text("Chatting with ${props.fromUsername}", fontWeight = FontWeight.Bold)
         }
 
         for (message in messages) {
             item {
-                Text("${message.userFrom}: ${message.body}")
+                Text("${props.fromUsername}: ${message.body}")
             }
         }
     }
