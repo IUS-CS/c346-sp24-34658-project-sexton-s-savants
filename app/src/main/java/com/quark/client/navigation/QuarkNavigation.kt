@@ -64,17 +64,3 @@ fun QuarkNavigation() {
         }
     }
 }
-
-/*
-composable(
-            route = Screen.Home.route + "/{password}",
-            arguments = listOf(
-            navArgument("password") {
-                type = NavType.StringType
-                defaultValue = "password"
-                nullable = true
-            }
-        )) { entry ->
-            Home(password = entry.arguments?.getString("password"))
-        }
- */
