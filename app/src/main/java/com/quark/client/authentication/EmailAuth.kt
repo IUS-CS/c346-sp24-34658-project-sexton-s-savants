@@ -1,6 +1,7 @@
 package com.quark.client.authentication
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 /**
  * The email authentication service.
@@ -44,6 +45,15 @@ class EmailAuth(
                     onResult(AuthResult.Failure)
                 }
             }
+    }
+
+    /**
+     * Gets the current user.
+     * @return the current user, or null if no user is signed in.
+     * @see FirebaseUser
+     */
+    fun getCurrentUser(): FirebaseUser? {
+        return auth.currentUser
     }
 
     companion object {

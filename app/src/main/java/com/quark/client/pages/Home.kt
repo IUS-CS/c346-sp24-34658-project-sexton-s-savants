@@ -22,31 +22,53 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.quark.client.database.Users
 import com.quark.client.navigation.Screen
 
+data class HomeProps(
+    val navController: NavController,
+    val users: Users,
+    val userId: String
+)
+
 @Composable
-fun Home(navController: NavController) {
-    AppBar(navController)
+fun Home(props: HomeProps) {
+    AppBar(props)
 }
 @Composable
-fun AppBar(navController: NavController) {
+fun AppBar(props: HomeProps) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        CenterAlignedTopAppBar(navController)
+        CenterAlignedTopAppBar(props)
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CenterAlignedTopAppBar(navController: NavController) {
+fun CenterAlignedTopAppBar(props: HomeProps) {
+    var username by remember {
+        mutableStateOf("")
+    }
+
+    LaunchedEffect(key1 = props.userId) {
+        props.users.getUserById(props.userId)?.let { user ->
+            username = user.username
+        }
+    }
+
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     Scaffold(
@@ -60,14 +82,14 @@ fun CenterAlignedTopAppBar(navController: NavController) {
                 ),
                 title = {
                     Text(
-                        "Welcome to QUARK",
+                        "Welcome, $username, to QUARK",
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-                        navController.navigate(Screen.Login.route)}) {
+                        props.navController.navigate(Screen.Login.route)}) {
                         Icon(
                             imageVector = Icons.Filled.ExitToApp,
                             contentDescription = "Sign Out"
@@ -97,12 +119,12 @@ fun CenterAlignedTopAppBar(navController: NavController) {
             }
         }
     ) { innerPadding ->
-        ScrollContent(innerPadding)
+        ScrollContent(innerPadding, props)
     }
 }
 
 @Composable
-fun ScrollContent(innerPadding: PaddingValues) {
+fun ScrollContent(innerPadding: PaddingValues, props: HomeProps) {
     val range = 1..100
 
     LazyColumn(
@@ -113,7 +135,7 @@ fun ScrollContent(innerPadding: PaddingValues) {
     ) {
         items(range.count()) { index ->
             TextButton(onClick = {
-
+                props.navController.navigate(Screen.Chat.withArgs(index.toString()))
             }) {
                 Text(text = "- Chat ${index + 1}", fontSize = 30.sp)
             }
