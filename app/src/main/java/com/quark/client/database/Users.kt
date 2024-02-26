@@ -6,6 +6,10 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
+/**
+ * This class is responsible for handling all user related database operations
+ * @param firestore: FirebaseFirestore
+ */
 class Users(
     private val firestore: FirebaseFirestore
 ) {
