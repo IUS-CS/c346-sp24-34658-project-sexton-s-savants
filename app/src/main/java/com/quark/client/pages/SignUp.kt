@@ -59,17 +59,28 @@ fun SignUp(navController: NavController, auth: EmailAuth) {
             })
         Button(onClick = {
             //Code validates and creates a user. gives error is user exists
-            if(!EmailAuth.validateEmail(email)) {
-                showErrorDialog(context, "$email is formatted incorrectly.\nFormat: Sexton@iu.edu")
-            }
+            if((email.isEmpty() || !EmailAuth.validateEmail(email)) || (password.isEmpty() || !EmailAuth.validatePasswordStrength(password))) {
+                showErrorDialog(context,
+                    "Email or Password is formatted incorrectly.\n\n" +
+                            "Email Format: Sexton@iu.edu\n\n" +
 
-            auth.createUser(email, password) {
-                if (it == AuthResult.Success){
-                    navController.navigate(Screen.Login.route)
-                } else {
-                    showErrorDialog(context, "$email is already in use.")
+                            "Password Format: \n" +
+                            "- At least 8 characters long\n" +
+                            "- Contains at least one uppercase letter\n" +
+                            "- Contains at least one lowercase letter\n" +
+                            "- Contains at least one number\n" +
+                            "- Contains at least one special character"
+                )
+            } else {
+                auth.createUser(email, password) {
+                    if (it == AuthResult.Success){
+                        navController.navigate(Screen.Login.route)
+                    } else {
+                        showErrorDialog(context, "$email is already in use.")
+                    }
                 }
             }
+
         }) {
             Text("Sign Up")
         }
