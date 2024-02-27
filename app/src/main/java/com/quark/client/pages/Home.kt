@@ -35,6 +35,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.quark.client.database.UserProfile
 import com.quark.client.database.Users
 import com.quark.client.navigation.Screen
 
@@ -66,7 +67,7 @@ fun CenterAlignedTopAppBar(props: HomeProps) {
     }
 
     LaunchedEffect(key1 = props.userId) {
-        props.users.getUserById(props.userId)?.let { user ->
+        props.users.getUserProfileById(props.userId)?.let { user ->
             username = user.username
         }
     }
@@ -143,7 +144,17 @@ fun CenterAlignedTopAppBar(props: HomeProps) {
 
 @Composable
 fun ScrollContent(innerPadding: PaddingValues, props: HomeProps) {
-    val range = 1..100
+    var activeConversations by remember {
+        mutableStateOf<List<UserProfile>>(emptyList())
+    }
+
+    LaunchedEffect(key1 = props.userId) {
+        props.users.getUserDataById(props.userId)?.let { user ->
+            user.activeConversations.map { userId ->
+                props.users.getUserProfileById(userId) ?: UserProfile(userId, "Unknown")
+            }.also { activeConversations = it }
+        }
+    }
 
     LazyColumn(
         modifier = Modifier
@@ -151,12 +162,15 @@ fun ScrollContent(innerPadding: PaddingValues, props: HomeProps) {
         contentPadding = innerPadding,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        items(range.count()) { index ->
-            TextButton(onClick = {
-                props.navController.navigate(Screen.Chat.withArgs(index.toString()))
-            }) {
-                Text(text = "- Chat ${index + 1}", fontSize = 30.sp)
+        for (user in activeConversations) {
+            item {
+                TextButton(onClick = {
+                    props.navController.navigate(Screen.Chat.withArgs(user.userId, user.username))
+                }) {
+                    Text(text = user.username, fontSize = 30.sp)
+                }
             }
         }
     }
 }
+

@@ -15,16 +15,15 @@ class Messages(
     private val firestore: FirebaseFirestore
 ) {
     /**
-     * Gets the messages from firebase using the provided userTo,
-     * then gets appropriate fields and converts to QuarkMessage
-     *
-     * @param userTo the user to get messages for
-     * @return the list of messages for the user
-     *
-     * @throws Exception if the messages cannot be retrieved
+     * Gets all messages to a user, from a user
+     * @param userTo the user who received the message
+     * @param userFrom the user who sent the message
+     * @return a list of messages
+     * @throws Exception if the operation fails
+     * @see QuarkMessage
      */
-    suspend fun getMessagesByUserTo(userTo: String): List<QuarkMessage> = suspendCancellableCoroutine { continuation ->
-        firestore.collection("messages").whereEqualTo("userTo", userTo).get()
+    suspend fun getMessagesToFrom(userTo: String, userFrom: String): List<QuarkMessage> = suspendCancellableCoroutine { continuation ->
+        firestore.collection("messages").whereEqualTo("userTo", userTo).whereEqualTo("userFrom", userFrom).get()
             .addOnSuccessListener { documents ->
                 val messages = mutableListOf<QuarkMessage>()
                 for (document in documents) {
