@@ -105,7 +105,7 @@ class Users(
      * Takes in a username, and will set it to the current profile if there is a profile
      * logged in, and if the username is not taken. Returns true on success, and false on failure
      * @param username: String
-     * @param auth: EmailAuth
+     * @param user: FirebaseUser
      * @return Boolean
      * @see UserProfile
      */
