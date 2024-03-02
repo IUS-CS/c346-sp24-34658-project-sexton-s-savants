@@ -1,11 +1,15 @@
 package com.quark.client.database
 
+import android.provider.ContactsContract.CommonDataKinds.Email
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.FirebaseAuth
 import com.quark.client.utils.GsonHelper
 import kotlinx.coroutines.suspendCancellableCoroutine
 import org.json.JSONObject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
+import com.quark.client.authentication.EmailAuth
 
 /**
  * This class is responsible for handling all user related database operations
@@ -73,6 +77,51 @@ class Users(
                 continuation.resumeWithException(exception)
             }
     }
+
+    /**
+     * Takes a prompted username, then searches firebase to see if it exists, Used as a dependency
+     * for setUsername
+     * @param username: String
+     * @return Boolean
+     * @see UserProfile
+     */
+
+    fun usernameUsedQuery(username: String): Boolean {
+        var result = true
+        firestore.collection("userprofiles").whereEqualTo("username", username).get()
+            .addOnSuccessListener { document ->
+                if (document == null) {
+                    result = false
+                }
+                else {
+                     result = true
+                }
+            }
+        return result
+    }
+
+
+    /**
+     * Takes in a username, and will set it to the current profile if there is a profile
+     * logged in, and if the username is not taken. Returns true on success, and false on failure
+     * @param username: String
+     * @param auth: EmailAuth
+     * @return Boolean
+     * @see UserProfile
+     */
+    suspend fun setUsername(username: String, user: FirebaseUser): Boolean? = suspendCancellableCoroutine {  continuation->
+        if(usernameUsedQuery(username) == false) {
+            firestore.collection("userprofiles").document(user.uid).set(username)
+                .addOnSuccessListener {
+                    continuation.resume(true)
+
+                }
+                .addOnFailureListener {
+                    continuation.resume(false)
+                }
+        }
+    }
+
 }
 
 /**

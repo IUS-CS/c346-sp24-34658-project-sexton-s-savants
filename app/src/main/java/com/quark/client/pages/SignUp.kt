@@ -15,7 +15,9 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.quark.client.authentication.EmailAuth
+import com.quark.client.database.Users
 import androidx.compose.ui.platform.LocalContext
+import com.google.firebase.firestore.FirebaseFirestore
 import com.quark.client.navigation.Screen
 import com.quark.client.authentication.AuthResult
 import com.quark.client.components.showErrorDialog
@@ -24,6 +26,9 @@ import com.quark.client.components.showErrorDialog
 fun SignUp(navController: NavController, auth: EmailAuth) {
     val context = LocalContext.current
 
+    var username by remember {
+        mutableStateOf("")
+    }
     var email by remember {
         mutableStateOf("")
     }
@@ -38,6 +43,15 @@ fun SignUp(navController: NavController, auth: EmailAuth) {
             fontSize = 20.sp,
             text = "Sign Up Page"
         )
+        OutlinedTextField(
+            value = username,
+            singleLine = true,
+            placeholder = {
+                Text("Username")
+            },
+            onValueChange = {
+                    text -> username = text
+            })
         OutlinedTextField(
             value = email,
             singleLine = true,
@@ -58,7 +72,7 @@ fun SignUp(navController: NavController, auth: EmailAuth) {
                     text -> password = text
             })
         Button(onClick = {
-            //Code validates and creates a user. gives error is user exists
+            //Code validates and creates a user. gives error if user exists
             if((email.isEmpty() || !EmailAuth.validateEmail(email)) || (password.isEmpty() || !EmailAuth.validatePasswordStrength(password))) {
                 showErrorDialog(context,
                     "Email or Password is formatted incorrectly.\n\n" +
@@ -71,7 +85,11 @@ fun SignUp(navController: NavController, auth: EmailAuth) {
                             "- Contains at least one number\n" +
                             "- Contains at least one special character"
                 )
-            } else {
+            }
+
+            //TODO: Check to see if a username is used, as well as adding a username to a newly created User
+
+            else {
                 auth.createUser(email, password) {
                     if (it == AuthResult.Success){
                         navController.navigate(Screen.Login.route)
