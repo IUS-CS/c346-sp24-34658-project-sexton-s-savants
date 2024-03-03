@@ -31,7 +31,7 @@ import com.quark.client.pages.SignUpProps
 @Composable
 fun QuarkNavigation() {
     val navController = rememberNavController()
-    val new_auth = EmailAuth
+    val auth = EmailAuth
     val db = Firebase.firestore
     val users = Users(db)
     val messages = Messages(db)
@@ -46,7 +46,7 @@ fun QuarkNavigation() {
             route = Screen.Home.route,
             ) {
             Home(
-                HomeProps(navController, users, new_auth.getCurrentUser()?.uid ?: "")
+                HomeProps(navController, users, auth.getCurrentUser()?.uid ?: "")
             )
         }
         composable(
@@ -71,7 +71,7 @@ fun QuarkNavigation() {
             Chat(
                 ChatProps(
                     messages,
-                    new_auth.getCurrentUser()?.uid!!,
+                    auth.getCurrentUser()?.uid!!,
                     entry.arguments?.getString("fromId")!!,
                     entry.arguments?.getString("fromUsername")!!
                 )
