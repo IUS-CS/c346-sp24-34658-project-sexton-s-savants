@@ -20,8 +20,12 @@ import com.quark.client.navigation.Screen
 import com.quark.client.authentication.AuthResult
 import com.quark.client.components.showErrorDialog
 
+data class LoginProps(
+    val navController: NavController,
+)
+
 @Composable
-fun Login(navController: NavController, auth: EmailAuth) {
+fun Login(props: LoginProps) {
     val context = LocalContext.current
 
     var email by remember {
@@ -62,9 +66,9 @@ fun Login(navController: NavController, auth: EmailAuth) {
             if((email.isEmpty() || !EmailAuth.validateEmail(email)) || password.isEmpty()) {
                 showErrorDialog(context, "Please enter all fields correctly.")
             }else{
-                auth.authenticateUser(email, password){
+                EmailAuth.authenticateUser(email, password){
                     if (it == AuthResult.Success) {
-                        navController.navigate(Screen.Home.route)
+                        props.navController.navigate(Screen.Home.route)
                     } else if (it == AuthResult.Failure){
                         showErrorDialog(context, "Please check the entered credentials.")
                     }
@@ -75,7 +79,7 @@ fun Login(navController: NavController, auth: EmailAuth) {
             Text("Login")
         }
         Button(onClick = {
-            navController.navigate(Screen.SignUp.route)
+            props.navController.navigate(Screen.SignUp.route)
         }) {
             Text("Sign Up")
         }

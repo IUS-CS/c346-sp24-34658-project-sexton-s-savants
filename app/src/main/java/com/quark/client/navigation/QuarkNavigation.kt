@@ -20,8 +20,10 @@ import com.quark.client.pages.Login
 import com.quark.client.pages.SignUp
 import com.quark.client.pages.Contacts
 import com.quark.client.pages.ContactsProps
+import com.quark.client.pages.LoginProps
 import com.quark.client.pages.Settings
 import com.quark.client.pages.SettingsProps
+import com.quark.client.pages.SignUpProps
 
 /**
  * Handles Quark's page navigation
@@ -29,14 +31,16 @@ import com.quark.client.pages.SettingsProps
 @Composable
 fun QuarkNavigation() {
     val navController = rememberNavController()
-    val auth = EmailAuth(Firebase.auth)
+    val auth = EmailAuth
     val db = Firebase.firestore
     val users = Users(db)
     val messages = Messages(db)
 
     NavHost(navController = navController, startDestination = Screen.Login.route) {
         composable(route = Screen.Login.route) {
-            Login(navController, auth)
+            Login(
+                LoginProps(navController)
+            )
         }
         composable(
             route = Screen.Home.route,
@@ -48,7 +52,9 @@ fun QuarkNavigation() {
         composable(
             route = Screen.SignUp.route,
             ) {
-            SignUp(navController, auth)
+            SignUp(
+                SignUpProps(navController)
+            )
         }
         composable(
             route = Screen.Chat.route + "/{fromId}/{fromUsername}",
@@ -75,14 +81,14 @@ fun QuarkNavigation() {
             route = Screen.Contacts.route,
         ) {
             Contacts(
-                ContactsProps(navController, auth)
+                ContactsProps(navController)
             )
         }
         composable(
             route = Screen.Settings.route,
         ) {
             Settings(
-                SettingsProps(navController, auth)
+                SettingsProps(navController)
             )
         }
     }
