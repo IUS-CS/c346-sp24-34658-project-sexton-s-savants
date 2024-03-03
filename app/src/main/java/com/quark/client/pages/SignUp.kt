@@ -20,8 +20,12 @@ import com.quark.client.navigation.Screen
 import com.quark.client.authentication.AuthResult
 import com.quark.client.components.showErrorDialog
 
+data class SignUpProps(
+    val navController: NavController,
+)
+
 @Composable
-fun SignUp(navController: NavController, auth: EmailAuth) {
+fun SignUp(props: SignUpProps) {
     val context = LocalContext.current
 
     var email by remember {
@@ -72,9 +76,9 @@ fun SignUp(navController: NavController, auth: EmailAuth) {
                             "- Contains at least one special character"
                 )
             } else {
-                auth.createUser(email, password) {
+                EmailAuth.createUser(email, password) {
                     if (it == AuthResult.Success){
-                        navController.navigate(Screen.Login.route)
+                        props.navController.navigate(Screen.Login.route)
                     } else {
                         showErrorDialog(context, "$email is already in use.")
                     }
@@ -86,7 +90,7 @@ fun SignUp(navController: NavController, auth: EmailAuth) {
         }
         Button(onClick = {
             //Code returns to login page
-            navController.navigate(Screen.Login.route)
+            props.navController.navigate(Screen.Login.route)
         }) {
             Text("Cancel")
         }

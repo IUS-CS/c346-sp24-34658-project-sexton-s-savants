@@ -28,12 +28,10 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.quark.client.authentication.EmailAuth
 import com.quark.client.navigation.Screen
 
 data class SettingsProps(
     val navController: NavController,
-    val auth: EmailAuth
 )
 
 @Composable

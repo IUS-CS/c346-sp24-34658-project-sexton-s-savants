@@ -23,7 +23,7 @@ import com.quark.client.navigation.Screen
 
 data class ChatProps(
     val messages: Messages,
-    val toId: String,  // todo: better names for these two
+    val toId: String,
     val fromId: String,
     val fromUsername: String,
 )

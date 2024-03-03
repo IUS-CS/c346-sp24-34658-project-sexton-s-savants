@@ -33,12 +33,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.quark.client.authentication.EmailAuth
 import com.quark.client.navigation.Screen
 
 data class ContactsProps(
     val navController: NavController,
-    val auth: EmailAuth
 )
 
 @Composable
