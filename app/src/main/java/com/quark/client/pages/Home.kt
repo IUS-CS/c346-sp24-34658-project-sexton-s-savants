@@ -36,7 +36,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.quark.client.database.Conversation
-import com.quark.client.database.UserProfile
 import com.quark.client.database.Users
 import com.quark.client.navigation.Screen
 

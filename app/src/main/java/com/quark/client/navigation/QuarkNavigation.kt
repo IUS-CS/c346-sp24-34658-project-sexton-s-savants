@@ -66,8 +66,10 @@ fun QuarkNavigation() {
             Chat(
                 ChatProps(
                     messages,
+                    auth.getCurrentUser()?.uid!!,
                     entry.arguments?.getString("fromUsername")!!,
-                    entry.arguments?.getString("conversationID")!!
+                    entry.arguments?.getString("conversationID")!!,
+                    users
                 )
             )
         }
