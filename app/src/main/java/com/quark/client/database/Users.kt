@@ -86,18 +86,18 @@ class Users(
      * @see UserProfile
      */
 
-    private fun usernameUsedQuery(username: String): Boolean {
+    suspend fun usernameUsedQuery(username: String): Boolean? = suspendCancellableCoroutine { continuation->
         var result = true
         firestore.collection("userprofiles").whereEqualTo("username", username).get()
             .addOnSuccessListener { document ->
                 if (document == null) {
-                    result = false
+                    continuation.resume(false)
                 }
                 else {
-                     result = true
+                     continuation.resume(true)
                 }
             }
-        return result
+        continuation.resume(null)
     }
 
 
@@ -110,16 +110,15 @@ class Users(
      * @see UserProfile
      */
     suspend fun setUsername(username: String, user: FirebaseUser): Boolean? = suspendCancellableCoroutine {  continuation->
-        if(!usernameUsedQuery(username)) {
-            firestore.collection("userprofiles").document(user.uid).set(username)
-                .addOnSuccessListener {
-                    continuation.resume(true)
+        firestore.collection("userprofiles").document(user.uid).set(username)
+            .addOnSuccessListener {
+                continuation.resume(true)
 
-                }
-                .addOnFailureListener {
-                    continuation.resume(false)
-                }
-        }
+            }
+            .addOnFailureListener {
+                continuation.resume(false)
+            }
+
     }
 
 }

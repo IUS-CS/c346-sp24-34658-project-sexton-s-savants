@@ -87,8 +87,6 @@ fun SignUp(navController: NavController, auth: EmailAuth) {
                 )
             }
 
-            //TODO: Check to see if a username is used, as well as adding a username to a newly created User
-
             else {
                 auth.createUser(email, password) {
                     if (it == AuthResult.Success){
