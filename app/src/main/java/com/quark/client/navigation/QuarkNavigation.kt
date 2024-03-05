@@ -56,8 +56,16 @@ fun QuarkNavigation() {
             )
         }
         composable(
-            route = Screen.Chat.route + "/{fromUsername}/{conversationID}",
+            route = Screen.Chat.route + "/{uid}/{fromUsername}/{conversationID}",
             arguments = listOf(
+                navArgument("uid") {
+                    type = NavType.StringType
+                    nullable = false
+                },
+                navArgument("fromUsername") {
+                    type = NavType.StringType
+                    nullable = false
+                },
                 navArgument("conversationID") {
                     type = NavType.StringType
                     nullable = false
@@ -66,7 +74,7 @@ fun QuarkNavigation() {
             Chat(
                 ChatProps(
                     messages,
-                    auth.getCurrentUser()?.uid!!,
+                    entry.arguments?.getString("uid")!!,
                     entry.arguments?.getString("fromUsername")!!,
                     entry.arguments?.getString("conversationID")!!,
                     users

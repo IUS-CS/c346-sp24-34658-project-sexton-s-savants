@@ -14,18 +14,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.quark.client.database.Conversation
 import com.quark.client.database.Messages
 import com.quark.client.database.QuarkMessage
-import com.quark.client.database.UserProfile
 import com.quark.client.database.Users
 
 data class ChatProps(
     val messages: Messages,
     val uid: String,
-    val fromUsername: String,
+    val fromUser: String,
     val conversationID: String,
-    val users: Users,
+    val user: Users
 )
 
 @Composable
@@ -34,11 +32,15 @@ fun Chat(props: ChatProps) {
         mutableStateOf<List<QuarkMessage>>(emptyList())
     }
 
-    LaunchedEffect(key1 = props.conversationID, key2 = props.users) {
-        props.messages.getConversation(props.conversationID).map { message ->
-            val usernameFrom = props.users.getUserProfileById(message.userFrom)?.username.toString()
-            QuarkMessage(usernameFrom, message.body)
-        }.also {messages = it }
+    var currentUsername by remember {
+        mutableStateOf("")
+    }
+
+    LaunchedEffect(key1 = props) {
+        messages = props.messages.getConversation(props.conversationID)
+        props.user.getUserProfileById(props.uid)?.let { user ->
+            currentUsername = user.username
+        }
     }
 
     LazyColumn(
@@ -48,12 +50,15 @@ fun Chat(props: ChatProps) {
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         item {
-            Text("Chatting with ${props.fromUsername}", fontWeight = FontWeight.Bold)
+            Text("Chatting with ${props.fromUser}", fontWeight = FontWeight.Bold)
         }
 
         for (message in messages) {
             item {
-                Text("${message.userFrom}: ${message.body}")
+                if(message.userFrom == props.uid)
+                    Text("${currentUsername}: ${message.body}")
+                else
+                    Text("${props.fromUser}: ${message.body}")
             }
         }
     }

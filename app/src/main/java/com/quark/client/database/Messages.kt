@@ -17,32 +17,11 @@ class Messages(
 ) {
     /**
      * Gets all messages to a user, from a user
-     * @param user1 one the participants in the chat
-     * @param user2 one the participants in the chat
+     * @param conversationID the id of the chat history between users
      * @return a list of messages
      * @throws Exception if the operation fails
      * @see QuarkMessage
      */
-    /*suspend fun getConversation(user1: String, user2: String, conversationID: String): List<QuarkMessage> = suspendCancellableCoroutine { continuation ->
-        firestore.collection("messages").whereEqualTo("Document ID", conversationID).get()
-            .addOnSuccessListener { documents ->
-                val messages = mutableListOf<QuarkMessage>()
-                for (document in documents) {
-                    val userFrom = document.getString("userFrom")
-                    val body = document.getString("body")
-
-                    if (userFrom != null && body != null) {
-                        messages.add(QuarkMessage(userFrom, user1, body))
-                    }
-                }
-                continuation.resume(messages)
-            }
-            .addOnFailureListener { exception ->
-                continuation.resumeWithException(exception)
-            }
-
-    }*/
-
     suspend fun getConversation(conversationID: String): List<QuarkMessage> = suspendCancellableCoroutine { continuation ->
         val conversationRef = firestore.collection("messages").document(conversationID)
         val subcollectionRef = conversationRef.collection("1")

@@ -165,13 +165,13 @@ fun ScrollContent(innerPadding: PaddingValues, props: HomeProps) {
         contentPadding = innerPadding,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        for (user in conversations) {
-            if (user == null) continue
+        for (conversation in conversations) {
+            if (conversation == null) continue
             item {
                 TextButton(onClick = {
-                    props.navController.navigate(Screen.Chat.withArgs(user.username, user.conversationID))
+                    props.navController.navigate(Screen.Chat.withArgs(props.userId, conversation.username, conversation.conversationID))
                 }) {
-                    Text(text = user.username, fontSize = 30.sp)
+                    Text(text = conversation.username, fontSize = 30.sp)
                 }
             }
         }
