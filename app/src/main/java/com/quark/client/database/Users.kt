@@ -87,7 +87,6 @@ class Users(
      */
 
     suspend fun usernameUsedQuery(username: String): Boolean? = suspendCancellableCoroutine { continuation->
-        var result = true
         firestore.collection("userprofiles").whereEqualTo("username", username).get()
             .addOnSuccessListener { document ->
                 if (document == null) {
