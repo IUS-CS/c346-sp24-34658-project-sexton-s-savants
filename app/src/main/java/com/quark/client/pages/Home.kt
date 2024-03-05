@@ -35,6 +35,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.quark.client.database.Conversation
 import com.quark.client.database.UserProfile
 import com.quark.client.database.Users
 import com.quark.client.navigation.Screen
@@ -144,15 +145,18 @@ fun CenterAlignedTopAppBar(props: HomeProps) {
 
 @Composable
 fun ScrollContent(innerPadding: PaddingValues, props: HomeProps) {
-    var activeConversations by remember {
-        mutableStateOf<List<UserProfile>>(emptyList())
+    var conversations by remember {
+        mutableStateOf<List<Conversation?>>(emptyList())
     }
 
     LaunchedEffect(key1 = props.userId) {
         props.users.getUserDataById(props.userId)?.let { user ->
-            user.activeConversations.map { userId ->
-                props.users.getUserProfileById(userId) ?: UserProfile(userId, "Unknown")
-            }.also { activeConversations = it }
+            user.activeConversations.map { conversationId ->
+                props.users.getUserByConversationId(conversationId)?.let { userId ->
+                    val profile = props.users.getUserProfileById(userId)
+                    Conversation(profile?.username ?: "Unknown", conversationId)
+                }
+            }.also {conversations = it }
         }
     }
 
@@ -162,10 +166,11 @@ fun ScrollContent(innerPadding: PaddingValues, props: HomeProps) {
         contentPadding = innerPadding,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        for (user in activeConversations) {
+        for (user in conversations) {
+            if (user == null) continue
             item {
                 TextButton(onClick = {
-                    props.navController.navigate(Screen.Chat.withArgs(user.userId, user.username))
+                    props.navController.navigate(Screen.Chat.withArgs(user.username, user.conversationID))
                 }) {
                     Text(text = user.username, fontSize = 30.sp)
                 }
@@ -173,4 +178,3 @@ fun ScrollContent(innerPadding: PaddingValues, props: HomeProps) {
         }
     }
 }
-
