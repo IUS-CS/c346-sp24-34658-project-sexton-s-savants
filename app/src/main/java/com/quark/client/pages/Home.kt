@@ -6,9 +6,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
+import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -95,7 +95,7 @@ fun CenterAlignedTopAppBar(props: HomeProps) {
                     IconButton(onClick = {
                         props.navController.navigate(Screen.Login.route)}) {
                         Icon(
-                            imageVector = Icons.Filled.ExitToApp,
+                            imageVector = Icons.AutoMirrored.Filled.ExitToApp,
                             contentDescription = "Sign Out"
                         )
                     }
@@ -134,7 +134,7 @@ fun CenterAlignedTopAppBar(props: HomeProps) {
                 onClick = {/*add code to create new chat here*/},
                 shape = CircleShape
             ) {
-                Icon(Icons.Filled.Send, "Create new chat.")
+                Icon(Icons.AutoMirrored.Filled.Send, "Create new chat.")
             }
         }
     ) { innerPadding ->

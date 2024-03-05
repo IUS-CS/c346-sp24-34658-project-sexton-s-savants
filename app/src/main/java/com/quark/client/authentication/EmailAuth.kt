@@ -1,7 +1,6 @@
 package com.quark.client.authentication
 
 import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
 import java.util.regex.Pattern

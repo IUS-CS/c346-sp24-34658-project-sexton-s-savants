@@ -1,6 +1,5 @@
 package com.quark.client.database
 
-import androidx.navigation.NavController
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
