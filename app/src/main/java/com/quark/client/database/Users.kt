@@ -1,9 +1,9 @@
 package com.quark.client.database
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.quark.client.authentication.EmailAuth
 import com.quark.client.utils.GsonHelper
 import kotlinx.coroutines.suspendCancellableCoroutine
-import org.json.JSONObject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
@@ -56,6 +56,7 @@ class Users(
             .addOnSuccessListener { document ->
                 if (document != null) {
                     val data = document.getString("data")
+
                     val userData = data?.let {
                         GsonHelper.gson.fromJson(it, UserData::class.java)
                     }
@@ -73,7 +74,26 @@ class Users(
                 continuation.resumeWithException(exception)
             }
     }
+
+    suspend fun getUserByConversationId(conversationId: String): String? = suspendCancellableCoroutine { continuation ->
+        firestore.collection("messages").document(conversationId).get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val user1 = document.getString("user1")
+                    val user2 = document.getString("user2")
+                    val uid = if (user1 == EmailAuth.getCurrentUser()?.uid) user2 else user1
+
+                    continuation.resume(uid)
+                } else {
+                    continuation.resume(null)
+                }
+            }
+            .addOnFailureListener { exception ->
+                continuation.resumeWithException(exception)
+            }
+    }
 }
+
 
 /**
  * Represents a user's public profile in the database
@@ -87,8 +107,13 @@ class UserProfile(
 
 /**
  * Represents a user's private data in the database
- * @property activeConversations a list of active conversations
+ * @property activeConversations a list of active conversation chatIDs
  */
 data class UserData(
     val activeConversations: List<String>
+)
+
+data class Conversation(
+    val username: String,
+    val conversationID: String
 )

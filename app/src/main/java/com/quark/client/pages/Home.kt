@@ -6,9 +6,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.filled.ExitToApp
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
+import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -35,7 +35,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.quark.client.database.UserProfile
+import com.quark.client.database.Conversation
 import com.quark.client.database.Users
 import com.quark.client.navigation.Screen
 
@@ -95,7 +95,7 @@ fun CenterAlignedTopAppBar(props: HomeProps) {
                     IconButton(onClick = {
                         props.navController.navigate(Screen.Login.route)}) {
                         Icon(
-                            imageVector = Icons.Filled.ExitToApp,
+                            imageVector = Icons.AutoMirrored.Filled.ExitToApp,
                             contentDescription = "Sign Out"
                         )
                     }
@@ -134,7 +134,7 @@ fun CenterAlignedTopAppBar(props: HomeProps) {
                 onClick = {/*add code to create new chat here*/},
                 shape = CircleShape
             ) {
-                Icon(Icons.Filled.Send, "Create new chat.")
+                Icon(Icons.AutoMirrored.Filled.Send, "Create new chat.")
             }
         }
     ) { innerPadding ->
@@ -144,15 +144,18 @@ fun CenterAlignedTopAppBar(props: HomeProps) {
 
 @Composable
 fun ScrollContent(innerPadding: PaddingValues, props: HomeProps) {
-    var activeConversations by remember {
-        mutableStateOf<List<UserProfile>>(emptyList())
+    var conversations by remember {
+        mutableStateOf<List<Conversation?>>(emptyList())
     }
 
     LaunchedEffect(key1 = props.userId) {
         props.users.getUserDataById(props.userId)?.let { user ->
-            user.activeConversations.map { userId ->
-                props.users.getUserProfileById(userId) ?: UserProfile(userId, "Unknown")
-            }.also { activeConversations = it }
+            user.activeConversations.map { conversationId ->
+                props.users.getUserByConversationId(conversationId)?.let { userId ->
+                    val profile = props.users.getUserProfileById(userId)
+                    Conversation(profile?.username ?: "Unknown", conversationId)
+                }
+            }.also {conversations = it }
         }
     }
 
@@ -162,15 +165,15 @@ fun ScrollContent(innerPadding: PaddingValues, props: HomeProps) {
         contentPadding = innerPadding,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        for (user in activeConversations) {
+        for (conversation in conversations) {
+            if (conversation == null) continue
             item {
                 TextButton(onClick = {
-                    props.navController.navigate(Screen.Chat.withArgs(user.userId, user.username))
+                    props.navController.navigate(Screen.Chat.withArgs(props.userId, conversation.username, conversation.conversationID))
                 }) {
-                    Text(text = user.username, fontSize = 30.sp)
+                    Text(text = conversation.username, fontSize = 30.sp)
                 }
             }
         }
     }
 }
-

@@ -6,9 +6,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -79,7 +79,7 @@ fun CenterAlignedTopAppBar(props: ContactsProps) {
                     IconButton(onClick = {
                         props.navController.navigate(Screen.Home.route)}) {
                         Icon(
-                            imageVector = Icons.Filled.ArrowBack,
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Back to Home"
                         )
                     }
@@ -118,7 +118,7 @@ fun CenterAlignedTopAppBar(props: ContactsProps) {
                 onClick = {/*add code to create new contact here*/},
                 shape = CircleShape
             ) {
-                Icon(Icons.Filled.Send, "Add new contact")
+                Icon(Icons.AutoMirrored.Filled.Send, "Add new contact")
             }
         }
     ) { innerPadding ->

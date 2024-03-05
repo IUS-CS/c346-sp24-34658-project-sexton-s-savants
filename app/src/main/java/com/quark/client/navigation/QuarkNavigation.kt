@@ -7,7 +7,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import com.quark.client.authentication.EmailAuth
 import com.quark.client.database.Messages
@@ -57,13 +56,17 @@ fun QuarkNavigation() {
             )
         }
         composable(
-            route = Screen.Chat.route + "/{fromId}/{fromUsername}",
+            route = Screen.Chat.route + "/{uid}/{fromUsername}/{conversationID}",
             arguments = listOf(
-                navArgument("fromId") {
+                navArgument("uid") {
                     type = NavType.StringType
                     nullable = false
                 },
                 navArgument("fromUsername") {
+                    type = NavType.StringType
+                    nullable = false
+                },
+                navArgument("conversationID") {
                     type = NavType.StringType
                     nullable = false
                 }
@@ -71,9 +74,10 @@ fun QuarkNavigation() {
             Chat(
                 ChatProps(
                     messages,
-                    auth.getCurrentUser()?.uid!!,
-                    entry.arguments?.getString("fromId")!!,
-                    entry.arguments?.getString("fromUsername")!!
+                    entry.arguments?.getString("uid")!!,
+                    entry.arguments?.getString("fromUsername")!!,
+                    entry.arguments?.getString("conversationID")!!,
+                    users
                 )
             )
         }
