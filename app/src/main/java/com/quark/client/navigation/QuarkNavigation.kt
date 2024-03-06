@@ -77,7 +77,8 @@ fun QuarkNavigation() {
                     entry.arguments?.getString("uid")!!,
                     entry.arguments?.getString("fromUsername")!!,
                     entry.arguments?.getString("conversationID")!!,
-                    users
+                    users,
+                    navController
                 )
             )
         }
