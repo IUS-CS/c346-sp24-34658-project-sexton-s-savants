@@ -79,8 +79,7 @@ class Users(
     }
 
     /**
-     * Takes a prompted username, then searches firebase to see if it exists, Used as a dependency
-     * for setUsername
+     * Takes a prompted username, then searches firebase to see if it exists
      * @param username: String
      * @return Boolean
      * @see UserProfile
@@ -93,10 +92,28 @@ class Users(
                     continuation.resume(false)
                 }
                 else {
-                     continuation.resume(true)
+                    continuation.resume(true)
                 }
             }
         continuation.resume(null)
+    }
+
+    /**
+     * Takes a username and checks if it meets the username requirements. Returns true if they are,
+     * returns false if not
+     * @param username: String
+     * @return Boolean
+     */
+    fun vertifyUsername(username: String): Boolean {
+        if (username.length > 16) {
+            return false
+        }
+        for(char in username) {
+            if(char == '@') {
+                return false
+            }
+        }
+        return true
     }
 
 

@@ -6,6 +6,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,10 +22,21 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.quark.client.navigation.Screen
 import com.quark.client.authentication.AuthResult
 import com.quark.client.components.showErrorDialog
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.suspendCancellableCoroutine
+
+data class SignUpProps(
+    val firestore: FirebaseFirestore,
+    val auth: EmailAuth,
+    val users: Users,
+    val navController: NavController
+
+)
 
 @Composable
-fun SignUp(navController: NavController, auth: EmailAuth) {
+fun SignUp(props: SignUpProps) {
     val context = LocalContext.current
+
 
     var username by remember {
         mutableStateOf("")
@@ -87,10 +99,12 @@ fun SignUp(navController: NavController, auth: EmailAuth) {
                 )
             }
 
+
+
             else {
-                auth.createUser(email, password) {
+                props.auth.createUser(email, password) {
                     if (it == AuthResult.Success){
-                        navController.navigate(Screen.Login.route)
+                        props.navController.navigate(Screen.Login.route)
                     } else {
                         showErrorDialog(context, "$email is already in use.")
                     }
@@ -102,7 +116,7 @@ fun SignUp(navController: NavController, auth: EmailAuth) {
         }
         Button(onClick = {
             //Code returns to login page
-            navController.navigate(Screen.Login.route)
+            props.navController.navigate(Screen.Login.route)
         }) {
             Text("Cancel")
         }

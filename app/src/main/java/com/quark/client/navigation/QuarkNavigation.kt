@@ -22,6 +22,7 @@ import com.quark.client.pages.Contacts
 import com.quark.client.pages.ContactsProps
 import com.quark.client.pages.Settings
 import com.quark.client.pages.SettingsProps
+import com.quark.client.pages.SignUpProps
 
 /**
  * Handles Quark's page navigation
@@ -48,7 +49,9 @@ fun QuarkNavigation() {
         composable(
             route = Screen.SignUp.route,
             ) {
-            SignUp(navController, auth)
+            SignUp(
+                SignUpProps(db, auth, users, navController)
+            )
         }
         composable(
             route = Screen.Chat.route + "/{fromId}/{fromUsername}",
