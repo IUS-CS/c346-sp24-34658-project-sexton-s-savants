@@ -1,5 +1,6 @@
 package com.quark.client.pages
 
+import androidx.compose.foundation.gestures.animateScrollBy
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -7,8 +8,11 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -91,13 +95,7 @@ fun CenterAlignedTopAppBar(props: ChatProps) {
     val focusRequester = remember { FocusRequester() }
     var textFieldFocused by remember { mutableStateOf(false) }
 
-    val insets = LocalView.current
-
-
-    fun sendMessage() {
-        //add code to send message here
-        inputValue = textFieldFocused.toString()
-    }
+    val listState = rememberLazyListState()
 
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -163,6 +161,11 @@ fun CenterAlignedTopAppBar(props: ChatProps) {
                 mutableStateOf("")
             }
 
+            fun sendMessage() {
+                //listState.animateScrollToItem(Int.MAX_VALUE)
+                inputValue = textFieldFocused.toString()
+            }
+
             LaunchedEffect(key1 = props) {
                 messages = props.messages.getConversation(props.conversationID)
                 props.user.getUserProfileById(props.uid)?.let { user ->
@@ -171,70 +174,82 @@ fun CenterAlignedTopAppBar(props: ChatProps) {
             }
 
             Column(
-                modifier = Modifier.fillMaxWidth(),
-
-                content = {
-                    Row(
-                        Modifier.weight(50f)
+                modifier = Modifier
+                    .fillMaxSize()
+            ){
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                ) {
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight()
+                            .padding(it),
+                        verticalArrangement = Arrangement.spacedBy(10.dp),
+                        state = listState
                     ) {
-                        LazyColumn(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .fillMaxHeight()
-                                .padding(it),
-                            verticalArrangement = Arrangement.spacedBy(10.dp)
-                        ) {
-                            for (message in messages) {
-                                item {
-                                    if (message.userFrom == props.uid)
-                                        Text(
-                                            buildAnnotatedString {
-                                                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, color = Color.Blue)) {
-                                                    append("${currentUsername}:")
-                                                }
-                                                append(" ${message.body}")
+                        for (message in messages) {
+                            item {
+                                if (message.userFrom == props.uid)
+                                    Text(
+                                        buildAnnotatedString {
+                                            withStyle(
+                                                style = SpanStyle(
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = Color.Blue
+                                                )
+                                            ) {
+                                                append("${currentUsername}:")
                                             }
-                                        )
-                                    else
-                                        Text(
-                                            buildAnnotatedString {
-                                                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold, color = Color.Red)) {
-                                                    append("${props.fromUser}:")
-                                                }
-                                                append(" ${message.body}")
+                                            append(" ${message.body}")
+                                        }
+                                    )
+                                else
+                                    Text(
+                                        buildAnnotatedString {
+                                            withStyle(
+                                                style = SpanStyle(
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = Color.Red
+                                                )
+                                            ) {
+                                                append("${props.fromUser}:")
                                             }
-                                        )
-                                }
+                                            append(" ${message.body}")
+                                        }
+                                    )
                             }
                         }
                     }
+                }
 
-                    Row(
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    TextField(
                         modifier = Modifier
-                            .weight(5f)
+                            .weight(1f)
+                            .focusRequester(focusRequester)
+                            .onFocusChanged { textFieldFocused = it.isFocused },
+                        value = inputValue,
+                        onValueChange = { inputValue = it },
+                        shape = RoundedCornerShape(28.dp)
+                    )
+                    Button(
+                        modifier = Modifier.height(56.dp),
+                        onClick = { sendMessage() },
+                        enabled = inputValue.isNotBlank()
                     ) {
-                        TextField(
-                            modifier = Modifier
-                                .weight(1f)
-                                .focusRequester(focusRequester)
-                                .onFocusChanged { textFieldFocused = it.isFocused },
-                            value = inputValue,
-                            onValueChange = { inputValue = it },
-                            shape = RoundedCornerShape(28.dp)
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.Send,
+                            contentDescription = "Send Message"
                         )
-                        Button(
-                            modifier = Modifier.height(56.dp),
-                            onClick = { sendMessage() },
-                            enabled = inputValue.isNotBlank()
-                        ) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.Send,
-                                contentDescription = "Send Message"
-                            )
-                        }
                     }
                 }
-            )
+            }
         }
     )
 }
