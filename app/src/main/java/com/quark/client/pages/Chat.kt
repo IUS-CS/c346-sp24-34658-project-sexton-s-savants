@@ -32,6 +32,7 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -52,9 +53,6 @@ import com.quark.client.database.Messages
 import com.quark.client.database.QuarkMessage
 import com.quark.client.database.Users
 import com.quark.client.navigation.Screen
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.coroutineScope
-
 
 data class ChatProps(
     val messages: Messages,
@@ -156,11 +154,11 @@ fun CenterAlignedTopAppBar(props: ChatProps) {
             }
 
             var test by remember {
-                mutableStateOf(0)
+                mutableIntStateOf(0)
             }
 
             fun sendMessage() {
-                test++
+                test++ //variable to test moving to bottom of screen once message sent
             }
 
             LaunchedEffect(key1 = props) {
@@ -170,7 +168,7 @@ fun CenterAlignedTopAppBar(props: ChatProps) {
                 }
             }
 
-            LaunchedEffect(key1 = test) {
+            LaunchedEffect(key1 = test, key2 = messages) {
                 listState.animateScrollToItem(messages.size+200)
             }
 
