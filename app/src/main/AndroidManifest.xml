@@ -16,7 +16,8 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label = "QuarkClient"
-            android:theme="@style/Theme.QuarkClient.SplashScreen">
+            android:theme="@style/Theme.QuarkClient.SplashScreen"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
