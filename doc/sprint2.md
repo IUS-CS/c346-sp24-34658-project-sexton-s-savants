@@ -66,9 +66,9 @@ Here are screenshots of what we did:
 | Points | Story                                                          |
 |--------|----------------------------------------------------------------|
 | 5      | As a user, I want to be able to create individual chats        |
-| 3      | As a user, I want to be able to open individual chats          |
+| ~~3~~  | ~~As a user, I want to be able to open individual chats~~      |
 | 8      | As a user, I want to be able to send messages                  |
-| 3      | As a user, I want to be able to receive a message              |
+| ~~3~~  | ~~As a user, I want to be able to receive a message~~          |
 | 2      | As a user, I want to be able to create new contacts            |
 | 3      | As a user, I want a user friendly UI                           |
 | 10     | As a developer, I want to use liboqs functions in my program   |
