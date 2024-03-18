@@ -1,0 +1,38 @@
+@startuml
+
+skinparam titleBorderRoundCorner 15
+skinparam titleBorderThickness 2
+skinparam titleFontSize 20
+
+title Jetpack Compose Schema
+
+entity "Page" {
+    Home
+    Chat
+    Login
+    Signup
+}
+
+entity "Subcomponents" {
+    InputBox
+    Button
+    Dropdown
+}
+
+entity "Global Singleton" {
+    EmailAuth
+    Users
+    Messages
+}
+
+entity "Props" {
+    HomeProps
+    ChatProps
+    LoginProps
+    SignupProps
+}
+
+"Page" --> "Global Singleton" : can always access
+"Page" --> "Subcomponents" : contains
+"Page" --> "Props" : has
+@enduml

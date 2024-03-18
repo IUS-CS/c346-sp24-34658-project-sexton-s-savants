@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="514px" preserveAspectRatio="none" style="width:373px;height:514px;background:#FFFFFF;" version="1.1" viewBox="0 0 373 514" width="373px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="26.4883" id="_title" style="stroke:none;stroke-width:1.0;" width="173" x="93.25" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="163" x="98.25" y="23.5352">Authentication System</text><!--MD5=[f8e9c56cbe04f20efb36ab0369675622]
+class EmailAuth--><g id="elem_EmailAuth"><rect codeLine="3" fill="#F1F1F1" height="146.9297" id="EmailAuth" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="349" x="7" y="218.9483"/><ellipse cx="142.25" cy="234.9483" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M144.7231,241.0913 Q144.1421,241.3902 143.5029,241.5396 Q142.8638,241.689 142.1582,241.689 Q139.6514,241.689 138.3315,240.0371 Q137.0117,238.3853 137.0117,235.2642 Q137.0117,232.1348 138.3315,230.4829 Q139.6514,228.8311 142.1582,228.8311 Q142.8638,228.8311 143.5112,228.9805 Q144.1587,229.1299 144.7231,229.4287 L144.7231,232.1514 Q144.0923,231.5704 143.4988,231.3006 Q142.9053,231.0308 142.2744,231.0308 Q140.9297,231.0308 140.2449,232.0975 Q139.5601,233.1641 139.5601,235.2642 Q139.5601,237.356 140.2449,238.4226 Q140.9297,239.4893 142.2744,239.4893 Q142.9053,239.4893 143.4988,239.2195 Q144.0923,238.9497 144.7231,238.3687 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="162.75" y="240.2393">EmailAuth</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="355" y1="250.9483" y2="250.9483"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="260" x="13" y="268.4834">Login works when user already exists.</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="4" x="13" y="284.9717"> </text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="273" x="13" y="301.46">Signup works when user does not exist,</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="337" x="13" y="317.9483">and will create a new user in firestore collections.</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="355" y1="324.9014" y2="324.9014"/><ellipse cx="18" cy="338.6455" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="293" x="27" y="342.4366">login(email: String, password: String): User</text><ellipse cx="18" cy="355.1338" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="306" x="27" y="358.9248">signUp(email: String, password: String): User</text></g><!--MD5=[b2381531161e1b6f0a4b654146a863ca]
+class Firebase--><g id="elem_Firebase"><rect codeLine="13" fill="#F1F1F1" height="64.4883" id="Firebase" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="270" x="46.5" y="442.8783"/><ellipse cx="148.25" cy="458.8783" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M151.8643,465.3783 L144.1445,465.3783 L144.1445,452.9852 L151.8643,452.9852 L151.8643,455.1434 L146.5933,455.1434 L146.5933,457.8163 L151.3662,457.8163 L151.3662,459.9745 L146.5933,459.9745 L146.5933,463.2201 L151.8643,463.2201 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="58" x="168.75" y="464.1693">Firebase</text><line style="stroke:#181818;stroke-width:0.5;" x1="47.5" x2="315.5" y1="474.8783" y2="474.8783"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="258" x="52.5" y="492.4134">Creates users and authenticates them</text><line style="stroke:#181818;stroke-width:0.5;" x1="47.5" x2="315.5" y1="499.3666" y2="499.3666"/></g><!--MD5=[df76e760f2062188d44f98c21a88999b]
+class UI--><g id="elem_UI"><rect codeLine="17" fill="#F1F1F1" height="97.4648" id="UI" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="272" x="45.5" y="44.4883"/><ellipse cx="170.25" cy="60.4883" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M173.8643,66.9883 L166.1445,66.9883 L166.1445,54.5952 L173.8643,54.5952 L173.8643,56.7534 L168.5933,56.7534 L168.5933,59.4263 L173.3662,59.4263 L173.3662,61.5845 L168.5933,61.5845 L168.5933,64.8301 L173.8643,64.8301 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="14" x="190.75" y="65.7793">UI</text><line style="stroke:#181818;stroke-width:0.5;" x1="46.5" x2="316.5" y1="76.4883" y2="76.4883"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="246" x="65.5" y="94.0234">Takes input and sends to EmailAuth</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="53.5" y="103.7207"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="86" x="65.5" y="110.5117">email: String</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="53.5" y="120.209"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="65.5" y="127">password: String</text><line style="stroke:#181818;stroke-width:0.5;" x1="46.5" x2="316.5" y1="133.9531" y2="133.9531"/></g><!--MD5=[33b9f33fe7f89f335ee3422ca71458f1]
+link UI to EmailAuth--><g id="link_UI_EmailAuth"><path codeLine="23" d="M181.5,142.2083 C181.5,163.2383 181.5,188.4883 181.5,212.1883 " fill="none" id="UI-to-EmailAuth" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="181.5,216.9883,185.5,207.9883,181.5,211.9883,177.5,207.9883,181.5,216.9883" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="183" x="182.5" y="185.5166">provides email and password</text></g><!--MD5=[894548ca78374dd576361f88ea7d8512]
+link EmailAuth to Firebase--><g id="link_EmailAuth_Firebase"><path codeLine="24" d="M181.5,366.1383 C181.5,390.2083 181.5,416.0183 181.5,436.3683 " fill="none" id="EmailAuth-to-Firebase" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="181.5,441.2583,185.5,432.2583,181.5,436.2583,177.5,432.2583,181.5,441.2583" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="146" x="182.5" y="409.4466">uses for authentication</text></g><!--MD5=[5b29e2ab4d86cd19cb37e620dc202848]
+@startuml
+title Authentication System
+
+class EmailAuth {
+    +login(email: String, password: String): User
+    +signUp(email: String, password: String): User
+
+    Login works when user already exists.
+
+    Signup works when user does not exist, 
+    and will create a new user in firestore collections.
+}
+
+entity Firebase {
+    Creates users and authenticates them
+}
+
+entity UI {
+    Takes input and sends to EmailAuth
+    -email: String
+    -password: String
+}
+
+UI - -> EmailAuth : provides email and password
+EmailAuth - -> Firebase : uses for authentication
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 13:01:30 EDT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

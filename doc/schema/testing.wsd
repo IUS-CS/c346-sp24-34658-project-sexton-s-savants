@@ -1,0 +1,21 @@
+@startuml
+entity "Testing" as testing {
+    Test functionality of APIs we provide
+}
+
+entity "Off-device Testing" as off_device_testing {
+    Test generic functions that can run anywhere 
+}
+
+entity "On-device Testing" as on_device_testing {
+    Test functions that require a device to run
+
+    includes: Firebase testing
+    - authentication
+    - database collections setup
+    - database rules
+}
+
+testing --> off_device_testing
+testing --> on_device_testing
+@enduml
