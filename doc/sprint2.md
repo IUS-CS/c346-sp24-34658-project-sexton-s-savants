@@ -26,9 +26,9 @@ This sprint, we completed:
 
 Here are screenshots of what we did:
 
-![Login Page](/doc/images/screenie1.png?raw=true)
+![Home Page](/doc/images/sprint2_imgs/home.png?raw=true)
 
-![Home page](/doc/images/screenie2.png?raw=true)
+![Chat page](/doc/images/sprint2_imgs/chat.png?raw=true)
 
 ## Retro
 

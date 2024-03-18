@@ -22,9 +22,9 @@ This sprint, we completed:
 
 Here are screenshots of what we did:
 
-![Login Page](/doc/images/screenie1.png?raw=true)
+![Login Page](/doc/images/sprint1_imgs/screenie1.png?raw=true)
 
-![Home page](/doc/images/screenie2.png?raw=true)
+![Home page](/doc/images/sprint1_imgs/screenie2.png?raw=true)
 
 ## Retro
 
