@@ -1,6 +1,6 @@
 # Sprint Ceremony Minutes
   
-Date: 2024-02-13
+Date: 2024-02-27
 
 Members present:
 
@@ -13,18 +13,22 @@ Members present:
 
 This sprint, we completed:
 
-* Starting documentation
-* Firebase to Android connection
-* Page navigation architecture
-* Email authentication
+* Completed design patterns documentation
+* Redesigned Page navigation architecture
+* Began chat conversations
 * Liboqs research
-* Basic UI implementation
+* Basic UI implementation and manipulation
+* Researched Firestore
+* Basic Firestore implementation and manipulation
+* Designed architecture of message storage in Firestore
+* Fixed crashing issue on login
+* Determined design patterns being used
 
 Here are screenshots of what we did:
 
-![Login Page](/doc/images/sprint1_imgs/screenie1.png?raw=true)
+![Home Page](/doc/images/sprint2_imgs/home.png?raw=true)
 
-![Home page](/doc/images/sprint1_imgs/screenie2.png?raw=true)
+![Chat page](/doc/images/sprint2_imgs/chat.png?raw=true)
 
 ## Retro
 
@@ -32,23 +36,28 @@ Here are screenshots of what we did:
 
 ### Good
 
-* Firebase was easy to setup
+* Firestore was relatively simple to set up
 * UI went good
-* Authentication was pretty easy
+* Displaying information stored in Firestore was simple
+* Executing queries in Firestore was relatively simple
 * We're having a high amount of communication :)
 * Members available for meetings
 
 ### Bad
 
-* "I did not make many contributions" -Logan
 * Liboqs is hard
-* We overcomplicated firebase
+* Firestore was initially confusing therefore took more time to research
+* There was a lot of work in everyone's schedules so a lot of time could't be allocated to work on quark.
+* Liboqs seems to be more difficult than we initially thought after more research
 
 ### Actionable Commitments
 
 * We will work more asynchronously, not just when we meet
-* Logan will work on some UI 
 * We will look into liboqs more !
+* We will dedicate more time to Quark
+* We will continue refining our UI 
+* We will prioritize completing the functionality for creating individual chats, opening individual chats, sending and receiving messages, and creating new contacts 
+* We will conduct regular check-ins to monitor progress and address any challenges promptly
 
 ## Planning
 
@@ -57,9 +66,9 @@ Here are screenshots of what we did:
 | Points | Story                                                          |
 |--------|----------------------------------------------------------------|
 | 5      | As a user, I want to be able to create individual chats        |
-| 3      | As a user, I want to be able to open individual chats          |
+| ~~3~~  | ~~As a user, I want to be able to open individual chats~~      |
 | 8      | As a user, I want to be able to send messages                  |
-| 3      | As a user, I want to be able to receive a message              |
+| ~~3~~  | ~~As a user, I want to be able to receive a message~~          |
 | 2      | As a user, I want to be able to create new contacts            |
 | 3      | As a user, I want a user friendly UI                           |
 | 10     | As a developer, I want to use liboqs functions in my program   |
