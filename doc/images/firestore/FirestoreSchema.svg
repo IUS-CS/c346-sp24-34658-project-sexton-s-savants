@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="325px" preserveAspectRatio="none" style="width:1100px;height:325px;background:#FFFFFF;" version="1.1" viewBox="0 0 1100 325" width="1100px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="45.332" id="_title" rx="7.5" ry="7.5" style="stroke:none;stroke-width:2.0;" width="277" x="404.5" y="5"/><text fill="#000000" font-family="sans-serif" font-size="30" font-weight="bold" lengthAdjust="spacing" textLength="267" x="409.5" y="39.0039">Firestore Schema</text><!--MD5=[0d2656fadf7191851afd801497368241]
+class groups--><g id="elem_groups"><rect codeLine="8" fill="#F1F1F1" height="64.4883" id="groups" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="81" x="7" y="71.572"/><ellipse cx="22" cy="87.572" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M25.6143,94.072 L17.8945,94.072 L17.8945,81.679 L25.6143,81.679 L25.6143,83.8372 L20.3433,83.8372 L20.3433,86.51 L25.1162,86.51 L25.1162,88.6682 L20.3433,88.6682 L20.3433,91.9138 L25.6143,91.9138 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="49" x="36" y="92.863">groups</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="87" y1="103.572" y2="103.572"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="38" x="13" y="121.1072">name</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="87" y1="128.0603" y2="128.0603"/></g><g id="elem_GMN3"><path d="M122.5,91.162 L122.5,99.822 L88.19,103.822 L122.5,107.822 L122.5,116.4726 A0,0 0 0 0 122.5,116.4726 L308.5,116.4726 A0,0 0 0 0 308.5,116.4726 L308.5,101.162 L298.5,91.162 L122.5,91.162 A0,0 0 0 0 122.5,91.162 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M298.5,91.162 L298.5,101.162 L308.5,101.162 L298.5,91.162 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="165" x="128.5" y="108.7304">groups is going to change</text></g><!--MD5=[af2c43fb5af8f353d81d7cf9c0ff746f]
+class conversations--><g id="elem_conversations"><rect codeLine="13" fill="#F1F1F1" height="80.9766" id="conversations" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="127" x="343" y="63.332"/><ellipse cx="358" cy="79.332" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M361.6143,85.832 L353.8945,85.832 L353.8945,73.439 L361.6143,73.439 L361.6143,75.5972 L356.3433,75.5972 L356.3433,78.27 L361.1162,78.27 L361.1162,80.4282 L356.3433,80.4282 L356.3433,83.6738 L361.6143,83.6738 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="95" x="372" y="84.623">conversations</text><line style="stroke:#181818;stroke-width:0.5;" x1="344" x2="469" y1="95.332" y2="95.332"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="39" x="349" y="112.8672">user1</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="39" x="349" y="129.3555">user2</text><line style="stroke:#181818;stroke-width:0.5;" x1="344" x2="469" y1="136.3086" y2="136.3086"/></g><!--MD5=[8457b8eeb6a36ad430b5159bc07dce68]
+class messages--><g id="elem_messages"><rect codeLine="18" fill="#F1F1F1" height="97.4648" id="messages" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="99" x="357" y="221.312"/><ellipse cx="372" cy="237.312" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M375.6143,243.812 L367.8945,243.812 L367.8945,231.419 L375.6143,231.419 L375.6143,233.5772 L370.3433,233.5772 L370.3433,236.25 L375.1162,236.25 L375.1162,238.4082 L370.3433,238.4082 L370.3433,241.6538 L375.6143,241.6538 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="67" x="386" y="242.603">messages</text><line style="stroke:#181818;stroke-width:0.5;" x1="358" x2="455" y1="253.312" y2="253.312"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="363" y="270.8472">userFrom</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="48" x="363" y="287.3355">userTo</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="34" x="363" y="303.8238">body</text><line style="stroke:#181818;stroke-width:0.5;" x1="358" x2="455" y1="310.7769" y2="310.7769"/></g><g id="elem_GMN8"><path d="M491,257.382 L491,266.042 L456.35,270.042 L491,274.042 L491,282.6926 A0,0 0 0 0 491,282.6926 L684,282.6926 A0,0 0 0 0 684,282.6926 L684,267.382 L674,257.382 L491,257.382 A0,0 0 0 0 491,257.382 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M674,257.382 L674,267.382 L684,267.382 L674,257.382 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="172" x="497" y="274.9504">body will also be encrypted</text></g><!--MD5=[731050c36bc2f89748db6c118ef59e5e]
+class userdata--><g id="elem_userdata"><rect codeLine="27" fill="#F1F1F1" height="80.9766" id="userdata" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="92" x="730.5" y="63.332"/><ellipse cx="745.5" cy="79.332" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M749.1143,85.832 L741.3945,85.832 L741.3945,73.439 L749.1143,73.439 L749.1143,75.5972 L743.8433,75.5972 L743.8433,78.27 L748.6162,78.27 L748.6162,80.4282 L743.8433,80.4282 L743.8433,83.6738 L749.1143,83.6738 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="60" x="759.5" y="84.623">userdata</text><line style="stroke:#181818;stroke-width:0.5;" x1="731.5" x2="821.5" y1="95.332" y2="95.332"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="736.5" y="112.8672">data</text><line style="stroke:#181818;stroke-width:0.5;" x1="731.5" x2="821.5" y1="119.8203" y2="119.8203"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="53" x="736.5" y="137.3555">uid (PK)</text></g><g id="elem_GMN13"><path d="M858,91.162 L858,99.822 L822.75,103.822 L858,107.822 L858,116.4726 A0,0 0 0 0 858,116.4726 L1093,116.4726 A0,0 0 0 0 1093,116.4726 L1093,101.162 L1083,91.162 L858,91.162 A0,0 0 0 0 858,91.162 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M1083,91.162 L1083,101.162 L1093,101.162 L1083,91.162 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="214" x="864" y="108.7304">JSON, eventually will be encrypted</text></g><!--MD5=[124ea951651c5d690ba989675308bae5]
+class userprofiles--><g id="elem_userprofiles"><rect codeLine="33" fill="#F1F1F1" height="97.4648" id="userprofiles" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="114" x="719.5" y="221.312"/><ellipse cx="734.5" cy="237.312" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M738.1143,243.812 L730.3945,243.812 L730.3945,231.419 L738.1143,231.419 L738.1143,233.5772 L732.8433,233.5772 L732.8433,236.25 L737.6162,236.25 L737.6162,238.4082 L732.8433,238.4082 L732.8433,241.6538 L738.1143,241.6538 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="82" x="748.5" y="242.603">userprofiles</text><line style="stroke:#181818;stroke-width:0.5;" x1="720.5" x2="832.5" y1="253.312" y2="253.312"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="68" x="725.5" y="270.8472">username</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="725.5" y="287.3355">publicKey</text><line style="stroke:#181818;stroke-width:0.5;" x1="720.5" x2="832.5" y1="294.2886" y2="294.2886"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="53" x="725.5" y="311.8238">uid (PK)</text></g><!--MD5=[0c7fc33382d3ee93c28ee22f260e0bb7]
+link conversations to messages--><g id="link_conversations_messages"><path codeLine="25" d="M406.5,144.572 C406.5,167.542 406.5,196.602 406.5,220.872 " fill="none" id="conversations-messages" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="54" x="407.5" y="187.8804">contains</text></g><!--MD5=[e4549f2b67144b5a763711148b70b362]
+link userdata to userprofiles--><g id="link_userdata_userprofiles"><path codeLine="39" d="M776.5,144.572 C776.5,167.542 776.5,196.602 776.5,220.872 " fill="none" id="userdata-userprofiles" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="57" x="777.5" y="187.8804">same uid</text></g><!--MD5=[c8e735d04fbfe794b5ecee10ad81f0f3]
+@startuml FirestoreSchema
+
+skinparam titleBorderRoundCorner 15
+skinparam titleBorderThickness 2
+skinparam titleFontSize 30
+
+title Firestore Schema
+
+entity "groups" as groups {
+    name
+}
+note right: groups is going to change
+
+entity "conversations" as conversations {
+    user1
+    user2
+}
+
+entity "messages" as messages {
+    userFrom
+    userTo
+    body
+}
+note right of messages: body will also be encrypted
+
+conversations - - messages : contains
+
+entity "userdata" as userdata {
+    uid (PK)
+    data
+}
+note right: JSON, eventually will be encrypted
+
+entity "userprofiles" as userprofiles {
+    uid (PK)
+    username
+    publicKey
+}
+
+userdata - - userprofiles : "same uid"
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 13:01:30 EDT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

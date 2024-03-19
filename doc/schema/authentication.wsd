@@ -1,0 +1,26 @@
+@startuml
+title Authentication System
+
+class EmailAuth {
+    +login(email: String, password: String): User
+    +signUp(email: String, password: String): User
+
+    Login works when user already exists.
+
+    Signup works when user does not exist, 
+    and will create a new user in firestore collections.
+}
+
+entity Firebase {
+    Creates users and authenticates them
+}
+
+entity UI {
+    Takes input and sends to EmailAuth
+    -email: String
+    -password: String
+}
+
+UI --> EmailAuth : provides email and password
+EmailAuth --> Firebase : uses for authentication
+@enduml

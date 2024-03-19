@@ -1,0 +1,47 @@
+' collections
+' groups -> name (note: definitely going to change)
+' conversations -> user1, user2, (messages collection -> userFrom, userTo, body) 
+' userdata -> uid (PK) | data (JSON, eventually will be encrypted)
+' userprofiles -> uid (PK) | username, publicKey
+
+@startuml FirestoreSchema
+
+skinparam titleBorderRoundCorner 15
+skinparam titleBorderThickness 2
+skinparam titleFontSize 30
+
+title Firestore Schema
+
+entity "groups" as groups {
+    name
+}
+note right: groups is going to change
+
+entity "conversations" as conversations {
+    user1
+    user2
+}
+
+entity "messages" as messages {
+    userFrom
+    userTo
+    body
+}
+note right of messages: body will also be encrypted
+
+conversations -- messages : contains
+
+entity "userdata" as userdata {
+    uid (PK)
+    data
+}
+note right: JSON, eventually will be encrypted
+
+entity "userprofiles" as userprofiles {
+    uid (PK)
+    username
+    publicKey
+}
+
+userdata -- userprofiles : "same uid"
+@enduml

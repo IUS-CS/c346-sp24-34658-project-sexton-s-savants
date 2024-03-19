@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="363px" preserveAspectRatio="none" style="width:471px;height:363px;background:#FFFFFF;" version="1.1" viewBox="0 0 471 363" width="471px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="33.5547" id="_title" rx="7.5" ry="7.5" style="stroke:none;stroke-width:2.0;" width="274" x="91.5" y="5"/><text fill="#000000" font-family="sans-serif" font-size="20" font-weight="bold" lengthAdjust="spacing" textLength="264" x="96.5" y="29.3359">Jetpack Compose Schema</text><!--MD5=[6a494c20d032ff54e1efa92c1369bc7b]
+class Page--><g id="elem_Page"><rect codeLine="8" fill="#F1F1F1" height="113.9531" id="Page" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="65" x="225" y="51.5547"/><ellipse cx="240" cy="67.5547" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M243.6143,74.0547 L235.8945,74.0547 L235.8945,61.6616 L243.6143,61.6616 L243.6143,63.8198 L238.3433,63.8198 L238.3433,66.4927 L243.1162,66.4927 L243.1162,68.6509 L238.3433,68.6509 L238.3433,71.8965 L243.6143,71.8965 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="33" x="254" y="72.8457">Page</text><line style="stroke:#181818;stroke-width:0.5;" x1="226" x2="289" y1="83.5547" y2="83.5547"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="40" x="231" y="101.0898">Home</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="231" y="117.5781">Chat</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="38" x="231" y="134.0664">Login</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="48" x="231" y="150.5547">Signup</text><line style="stroke:#181818;stroke-width:0.5;" x1="226" x2="289" y1="157.5078" y2="157.5078"/></g><!--MD5=[91caf4f8cda599ff0e0828d18226e76e]
+class Subcomponents--><g id="elem_Subcomponents"><rect codeLine="15" fill="#F1F1F1" height="97.4648" id="Subcomponents" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="143" x="7" y="250.7547"/><ellipse cx="22" cy="266.7547" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M25.6143,273.2547 L17.8945,273.2547 L17.8945,260.8616 L25.6143,260.8616 L25.6143,263.0198 L20.3433,263.0198 L20.3433,265.6927 L25.1162,265.6927 L25.1162,267.8509 L20.3433,267.8509 L20.3433,271.0965 L25.6143,271.0965 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="111" x="36" y="272.0457">Subcomponents</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="149" y1="282.7547" y2="282.7547"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="62" x="13" y="300.2898">InputBox</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="45" x="13" y="316.7781">Button</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="13" y="333.2664">Dropdown</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="149" y1="340.2195" y2="340.2195"/></g><!--MD5=[efa52bf62061d9df35ff1fa57d2caf2f]
+class Global Singleton--><g id="elem_Global Singleton"><rect codeLine="21" fill="#F1F1F1" height="97.4648" id="Global Singleton" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="145" x="185" y="250.7547"/><ellipse cx="200" cy="266.7547" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M203.6143,273.2547 L195.8945,273.2547 L195.8945,260.8616 L203.6143,260.8616 L203.6143,263.0198 L198.3433,263.0198 L198.3433,265.6927 L203.1162,265.6927 L203.1162,267.8509 L198.3433,267.8509 L198.3433,271.0965 L203.6143,271.0965 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="113" x="214" y="272.0457">Global Singleton</text><line style="stroke:#181818;stroke-width:0.5;" x1="186" x2="329" y1="282.7547" y2="282.7547"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="191" y="300.2898">EmailAuth</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="38" x="191" y="316.7781">Users</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="191" y="333.2664">Messages</text><line style="stroke:#181818;stroke-width:0.5;" x1="186" x2="329" y1="340.2195" y2="340.2195"/></g><!--MD5=[89fc3d537a2c6f6f9c5a4edca86d3956]
+class Props--><g id="elem_Props"><rect codeLine="27" fill="#F1F1F1" height="113.9531" id="Props" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="99" x="365" y="242.5147"/><ellipse cx="392.6" cy="258.5147" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M396.2143,265.0147 L388.4945,265.0147 L388.4945,252.6216 L396.2143,252.6216 L396.2143,254.7798 L390.9433,254.7798 L390.9433,257.4527 L395.7162,257.4527 L395.7162,259.6109 L390.9433,259.6109 L390.9433,262.8565 L396.2143,262.8565 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="39" x="409.4" y="263.8057">Props</text><line style="stroke:#181818;stroke-width:0.5;" x1="366" x2="463" y1="274.5147" y2="274.5147"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="79" x="371" y="292.0498">HomeProps</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="71" x="371" y="308.5381">ChatProps</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="371" y="325.0264">LoginProps</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="371" y="341.5147">SignupProps</text><line style="stroke:#181818;stroke-width:0.5;" x1="366" x2="463" y1="348.4678" y2="348.4678"/></g><!--MD5=[becb042aa2756889d092b24fbb815659]
+link Page to Global Singleton--><g id="link_Page_Global Singleton"><path codeLine="34" d="M256,165.9547 C255.79,175.8047 255.61,185.9547 255.5,195.5147 C255.32,211.2947 255.5,228.4447 255.81,244.1247 " fill="none" id="Page-to-Global Singleton" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="255.91,248.7847,259.7292,239.7065,255.81,243.7857,251.7308,239.8665,255.91,248.7847" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="114" x="256.5" y="209.083">can always access</text></g><!--MD5=[67db7b79e338e1c8453d95973b24330e]
+link Page to Subcomponents--><g id="link_Page_Subcomponents"><path codeLine="35" d="M224.67,144.1947 C197.73,172.6247 159.16,213.3347 128.41,245.8047 " fill="none" id="Page-to-Subcomponents" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="124.97,249.4347,134.0585,245.6402,128.404,245.8004,128.2437,240.1458,124.97,249.4347" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="54" x="173.5" y="209.083">contains</text></g><!--MD5=[d24d8b2b23eea8c4448d90270ecfdbbb]
+link Page to Props--><g id="link_Page_Props"><path codeLine="36" d="M290.37,126.4547 C316.62,141.4447 352.67,165.5847 375.5,195.5147 C384.68,207.5447 391.91,221.9947 397.52,236.2047 " fill="none" id="Page-to-Props" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="399.29,240.8547,399.8127,231.0197,397.5047,236.1843,392.3401,233.8762,399.29,240.8547" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="385.5" y="209.083">has</text></g><!--MD5=[6a8ee6f285b76d4dcecb0695cb10e550]
+@startuml
+
+skinparam titleBorderRoundCorner 15
+skinparam titleBorderThickness 2
+skinparam titleFontSize 20
+
+title Jetpack Compose Schema
+
+entity "Page" {
+    Home
+    Chat
+    Login
+    Signup
+}
+
+entity "Subcomponents" {
+    InputBox
+    Button
+    Dropdown
+}
+
+entity "Global Singleton" {
+    EmailAuth
+    Users
+    Messages
+}
+
+entity "Props" {
+    HomeProps
+    ChatProps
+    LoginProps
+    SignupProps
+}
+
+"Page" - -> "Global Singleton" : can always access
+"Page" - -> "Subcomponents" : contains
+"Page" - -> "Props" : has
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 13:01:30 EDT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
