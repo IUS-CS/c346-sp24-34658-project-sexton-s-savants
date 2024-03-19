@@ -47,6 +47,18 @@ fun SignUp(props: SignUpProps) {
     var password by remember {
         mutableStateOf("")
     }
+    var updated by remember {
+        mutableStateOf(false)
+    }
+
+    LaunchedEffect(key1 = updated) {
+        if(props.users.usernameUsedQuery(username) == true) {
+            showErrorDialog(context,
+                "Username is already in use. Try another.")
+        }
+        updated = false
+    }
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -99,9 +111,14 @@ fun SignUp(props: SignUpProps) {
                 )
             }
 
-
+            else if (!props.users.vertifyUsername(username)) {
+                showErrorDialog(context,
+                    "Username is formatted incorrectly.\n\n" +
+                            "Username cannot exceed 16 character or include an '@'.")
+            }
 
             else {
+                updated = true
                 props.auth.createUser(email, password) {
                     if (it == AuthResult.Success){
                         props.navController.navigate(Screen.Login.route)
