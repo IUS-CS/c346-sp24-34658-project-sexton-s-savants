@@ -1,7 +1,11 @@
 package com.quark.client.database
 
+import android.content.Context
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.quark.client.components.showErrorDialog
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -16,7 +20,7 @@ class Messages(
     private val firestore: FirebaseFirestore,
 ) {
 
-    private val messages = mutableListOf<QuarkMessage>()
+    private var messages = mutableListOf<QuarkMessage>()
     /**
      * Gets all messages to a user, from a user
      * @param conversationID the id of the chat history between users
@@ -27,6 +31,8 @@ class Messages(
     suspend fun getConversation(conversationID: String): List<QuarkMessage> = suspendCancellableCoroutine { continuation ->
         val conversationRef = firestore.collection("messages").document(conversationID)
         val subcollectionRef = conversationRef.collection("1")
+
+        messages = emptyList<QuarkMessage>().toMutableList()
 
         subcollectionRef.get()
             .addOnSuccessListener { documents ->
@@ -64,6 +70,26 @@ class Messages(
                 continuation.resumeWithException(exception)
             }
     }
+
+    /*suspend fun isUpdated(conversationID: String): List<QuarkMessage> = suspendCancellableCoroutine { continuation ->
+        val conversationRef = firestore.collection("messages").document(conversationID)
+        val subcollectionRef = conversationRef.collection("1")
+
+        subcollectionRef.addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                println("nope")
+                return@addSnapshotListener
+            }
+
+            if (snapshot != null && !snapshot.isEmpty) {
+                println(snapshot.documentChanges.size)
+            } else {
+                println("idk")
+            }
+        }
+
+
+    }*/
 }
 
 /**
