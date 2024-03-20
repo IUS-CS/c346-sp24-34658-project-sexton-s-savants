@@ -157,17 +157,25 @@ fun CenterAlignedTopAppBar(props: ChatProps) {
                 mutableStateOf(false)
             }
 
-            LaunchedEffect(key1 = props) {
-                messages = props.messages.getConversation(props.conversationID)
+            LaunchedEffect(props.conversationID) {
                 props.user.getUserProfileById(props.uid)?.let { user ->
                     currentUsername = user.username
                 }
-                listState.animateScrollToItem(messages.size)
+
+                val messagesFlow = props.messages.getUpdatedConversation(props.conversationID)
+                messagesFlow.collect { updatedMessages ->
+                    messages = updatedMessages
+                    listState.animateScrollToItem(messages.size)
+                }
             }
 
             LaunchedEffect(key1 = updated) {
-                if(updated) {
-                    props.messages.updateConversation(props.conversationID, props.uid, inputValue)
+                if (updated) {
+                    props.messages.updateConversation(
+                        props.conversationID,
+                        props.uid,
+                        inputValue
+                    )
                     inputValue = ""
                     listState.animateScrollToItem(messages.size)
                     updated = false
@@ -177,7 +185,7 @@ fun CenterAlignedTopAppBar(props: ChatProps) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-            ){
+            ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()

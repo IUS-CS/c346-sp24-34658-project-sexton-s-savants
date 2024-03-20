@@ -1,13 +1,9 @@
 package com.quark.client.database
 
-import android.content.Context
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import com.quark.client.components.showErrorDialog
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
 /**
@@ -21,36 +17,6 @@ class Messages(
 ) {
 
     private var messages = mutableListOf<QuarkMessage>()
-    /**
-     * Gets all messages to a user, from a user
-     * @param conversationID the id of the chat history between users
-     * @return a list of messages
-     * @throws Exception if the operation fails
-     * @see QuarkMessage
-     */
-    suspend fun getConversation(conversationID: String): List<QuarkMessage> = suspendCancellableCoroutine { continuation ->
-        val conversationRef = firestore.collection("messages").document(conversationID)
-        val subcollectionRef = conversationRef.collection("1")
-
-        messages = emptyList<QuarkMessage>().toMutableList()
-
-        subcollectionRef.get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    val userFrom = document.getString("userFrom")
-                    val body = document.getString("Body")
-
-                    if (userFrom != null && body != null) {
-                        messages.add(QuarkMessage(userFrom, body))
-                    }
-                }
-
-                continuation.resume(messages)
-            }
-            .addOnFailureListener { exception ->
-                continuation.resumeWithException(exception)
-            }
-    }
 
     suspend fun updateConversation(conversationID: String, userFrom: String, body: String): List<QuarkMessage> = suspendCancellableCoroutine { continuation ->
         val conversationRef = firestore.collection("messages").document(conversationID)
@@ -61,35 +27,33 @@ class Messages(
             "userFrom" to userFrom,
         )
         subcollectionRef.document("Message " + (messages.size + 1).toString()).set(newMessage)
-            .addOnSuccessListener {
-                messages.add(QuarkMessage(userFrom, body))
-
-                continuation.resume(messages)
-            }
             .addOnFailureListener { exception ->
                 continuation.resumeWithException(exception)
             }
     }
 
-    /*suspend fun isUpdated(conversationID: String): List<QuarkMessage> = suspendCancellableCoroutine { continuation ->
+    suspend fun getUpdatedConversation(conversationID: String) = callbackFlow<List<QuarkMessage>> {
         val conversationRef = firestore.collection("messages").document(conversationID)
         val subcollectionRef = conversationRef.collection("1")
 
-        subcollectionRef.addSnapshotListener { snapshot, e ->
-            if (e != null) {
-                println("nope")
+        val listener = subcollectionRef.addSnapshotListener { snapshot, error ->
+            if (error != null) {
+                close(error)
                 return@addSnapshotListener
             }
 
-            if (snapshot != null && !snapshot.isEmpty) {
-                println(snapshot.documentChanges.size)
-            } else {
-                println("idk")
+            snapshot?.documents?.forEach { document ->
+                val userFrom = document.getString("userFrom")
+                val body = document.getString("Body")
+                if (userFrom != null && body != null) {
+                    messages.add(QuarkMessage(userFrom, body))
+                }
             }
+            trySend(messages).isSuccess
         }
 
-
-    }*/
+        awaitClose { listener.remove() }
+    }
 }
 
 /**
