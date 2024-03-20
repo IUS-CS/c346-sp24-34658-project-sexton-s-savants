@@ -51,13 +51,15 @@ fun SignUp(props: SignUpProps) {
         mutableStateOf(false)
     }
 
-    LaunchedEffect(key1 = updated) {
-        if(props.users.usernameUsedQuery(username) == true) {
-            showErrorDialog(context,
-                "Username is already in use. Try another.")
+    /*LaunchedEffect(key1 = updated) {
+        if(updated) {
+            if(props.users.usernameUsedQuery(username) == true) {
+                showErrorDialog(context,
+                    "Username is already in use. Try another.")
+            }
+            updated = false
         }
-        updated = false
-    }
+    }*/
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
