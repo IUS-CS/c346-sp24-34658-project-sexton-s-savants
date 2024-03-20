@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="257px" preserveAspectRatio="none" style="width:487px;height:257px;background:#FFFFFF;" version="1.1" viewBox="0 0 487 257" width="487px" zoomAndPan="magnify"><defs/><g><rect fill="none" height="26.4883" id="_title" style="stroke:none;stroke-width:1.0;" width="106" x="183.75" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="96" x="188.75" y="23.5352">Local Storage</text><!--MD5=[5c923f9addd6e96d0989d8d9d9b17800]
+class LocalStorage--><g id="elem_LocalStorage"><rect codeLine="3" fill="#F1F1F1" height="80.9766" id="LocalStorage" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="145" x="7" y="169.4883"/><ellipse cx="33.25" cy="185.4883" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M35.7231,191.6313 Q35.1421,191.9302 34.5029,192.0796 Q33.8638,192.229 33.1582,192.229 Q30.6514,192.229 29.3315,190.5771 Q28.0117,188.9253 28.0117,185.8042 Q28.0117,182.6748 29.3315,181.0229 Q30.6514,179.3711 33.1582,179.3711 Q33.8638,179.3711 34.5112,179.5205 Q35.1587,179.6699 35.7231,179.9687 L35.7231,182.6914 Q35.0923,182.1104 34.4988,181.8406 Q33.9053,181.5708 33.2744,181.5708 Q31.9297,181.5708 31.2449,182.6375 Q30.5601,183.7041 30.5601,185.8042 Q30.5601,187.896 31.2449,188.9626 Q31.9297,190.0293 33.2744,190.0293 Q33.9053,190.0293 34.4988,189.7595 Q35.0923,189.4897 35.7231,188.9087 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="88" x="49.75" y="190.7793">LocalStorage</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="151" y1="201.4883" y2="201.4883"/><ellipse cx="18" cy="215.2324" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119" x="27" y="219.0234">User's Private Key</text><ellipse cx="18" cy="231.7207" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="27" y="235.5117">Configuration</text><line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="151" y1="242.4648" y2="242.4648"/></g><g id="elem_GMN3"><path d="M186.5,197.3283 L186.5,205.9783 L152.43,209.9783 L186.5,213.9783 L186.5,222.6388 A0,0 0 0 0 186.5,222.6388 L480.5,222.6388 A0,0 0 0 0 480.5,222.6388 L480.5,207.3283 L470.5,197.3283 L186.5,197.3283 A0,0 0 0 0 186.5,197.3283 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M470.5,197.3283 L470.5,207.3283 L480.5,207.3283 L470.5,197.3283 " fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="273" x="192.5" y="214.8966">stores local information outside of firebase</text></g><!--MD5=[2f998df7c439600ea720bfb4f14dac81]
+class quark--><g id="elem_quark"><rect codeLine="12" fill="#F1F1F1" height="48" id="quark" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="74" x="42.5" y="44.4883"/><ellipse cx="57.5" cy="60.4883" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M61.1143,66.9883 L53.3945,66.9883 L53.3945,54.5952 L61.1143,54.5952 L61.1143,56.7534 L55.8433,56.7534 L55.8433,59.4263 L60.6162,59.4263 L60.6162,61.5845 L55.8433,61.5845 L55.8433,64.8301 L61.1143,64.8301 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="71.5" y="65.7793">Quark</text><line style="stroke:#181818;stroke-width:0.5;" x1="43.5" x2="115.5" y1="76.4883" y2="76.4883"/><line style="stroke:#181818;stroke-width:0.5;" x1="43.5" x2="115.5" y1="84.4883" y2="84.4883"/></g><!--MD5=[87f9abb20403a2b61372d2325de11e64]
+link quark to LocalStorage--><g id="link_quark_LocalStorage"><path codeLine="13" d="M79.5,92.8383 C79.5,111.8383 79.5,139.2483 79.5,162.6583 " fill="none" id="quark-to-LocalStorage" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="79.5,167.6383,83.5,158.6383,79.5,162.6383,75.5,158.6383,79.5,167.6383" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="56" x="80.5" y="136.0566">accesses</text></g><!--MD5=[7d19f2c0569239168c8299363da4eb07]
+@startuml
+title Local Storage
+
+class LocalStorage {
+    + User's Private Key
+    + Configuration
+}
+
+note right of LocalStorage
+    stores local information outside of firebase
+end note
+
+entity "Quark" as quark
+quark - -> LocalStorage : accesses
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 13:01:30 EDT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

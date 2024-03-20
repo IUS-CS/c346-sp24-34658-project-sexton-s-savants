@@ -1,0 +1,15 @@
+@startuml
+title Local Storage
+
+class LocalStorage {
+    + User's Private Key
+    + Configuration
+}
+
+note right of LocalStorage
+    stores local information outside of firebase
+end note
+
+entity "Quark" as quark
+quark --> LocalStorage : accesses
+@enduml
