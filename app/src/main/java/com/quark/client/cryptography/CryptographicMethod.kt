@@ -54,12 +54,4 @@ interface CryptographicMethod {
      * @return <User's Private Key, User's Public Key>
      */
     fun getFromKeystore(): Pair<String, String>
-
-    /**
-     * Gets partner's public key from Firebase
-     * @return Partner's Public Key
-     */
-    fun getPartnerPublicKey(): String
-
-
 }
