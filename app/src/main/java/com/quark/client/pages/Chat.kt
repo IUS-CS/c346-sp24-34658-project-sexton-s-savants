@@ -157,6 +157,10 @@ fun CenterAlignedTopAppBar(props: ChatProps) {
                 mutableStateOf(false)
             }
 
+            var scroll by remember{
+                mutableStateOf(false)
+            }
+
             LaunchedEffect(props.conversationID) {
                 props.user.getUserProfileById(props.uid)?.let { user ->
                     currentUsername = user.username
@@ -165,7 +169,15 @@ fun CenterAlignedTopAppBar(props: ChatProps) {
                 val messagesFlow = props.messages.getUpdatedConversation(props.conversationID)
                 messagesFlow.collect { updatedMessages ->
                     messages = updatedMessages
+                    scroll = true
+                }
+
+            }
+
+            LaunchedEffect(key1 = scroll) {
+                if (scroll) {
                     listState.animateScrollToItem(messages.size)
+                    scroll = false
                 }
             }
 
