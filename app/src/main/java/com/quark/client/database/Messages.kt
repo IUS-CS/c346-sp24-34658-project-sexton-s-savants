@@ -1,9 +1,13 @@
 package com.quark.client.database
 
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import com.google.firestore.admin.v1.Index
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
 /**
@@ -23,10 +27,15 @@ class Messages(
         val subcollectionRef = conversationRef.collection("1")
 
         val newMessage = hashMapOf(
+            "Time" to FieldValue.serverTimestamp(),
             "Body" to body,
             "userFrom" to userFrom,
         )
-        subcollectionRef.document("Message " + (messages.size + 1).toString()).set(newMessage)
+        subcollectionRef.add(newMessage)
+            .addOnSuccessListener {
+                messages.add(QuarkMessage(userFrom, body))
+                continuation.resume(messages)
+            }
             .addOnFailureListener { exception ->
                 continuation.resumeWithException(exception)
             }
@@ -34,7 +43,7 @@ class Messages(
 
     suspend fun getUpdatedConversation(conversationID: String) = callbackFlow<List<QuarkMessage>> {
         val conversationRef = firestore.collection("messages").document(conversationID)
-        val subcollectionRef = conversationRef.collection("1")
+        val subcollectionRef = conversationRef.collection("1").orderBy("Time", Query.Direction.ASCENDING)
 
         val listener = subcollectionRef.addSnapshotListener { snapshot, error ->
             if (error != null) {
@@ -42,14 +51,17 @@ class Messages(
                 return@addSnapshotListener
             }
 
+            val newMessages = mutableListOf<QuarkMessage>() // Create a new list for storing messages
+
             snapshot?.documents?.forEach { document ->
                 val userFrom = document.getString("userFrom")
                 val body = document.getString("Body")
                 if (userFrom != null && body != null) {
-                    messages.add(QuarkMessage(userFrom, body))
+                    newMessages.add(QuarkMessage(userFrom, body)) // Add new messages to the new list
                 }
             }
-            trySend(messages).isSuccess
+
+            trySend(newMessages).isSuccess // Send the new list of messages
         }
 
         awaitClose { listener.remove() }
