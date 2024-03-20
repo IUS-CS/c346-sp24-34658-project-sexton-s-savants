@@ -1,6 +1,11 @@
 package com.quark.client.database
 
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import com.google.firestore.admin.v1.Index
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
@@ -12,36 +17,54 @@ import kotlin.coroutines.resumeWithException
  * @property firestore the firestore database
  */
 class Messages(
-    private val firestore: FirebaseFirestore
+    private val firestore: FirebaseFirestore,
 ) {
-    /**
-     * Gets all messages to a user, from a user
-     * @param conversationID the id of the chat history between users
-     * @return a list of messages
-     * @throws Exception if the operation fails
-     * @see QuarkMessage
-     */
-    suspend fun getConversation(conversationID: String): List<QuarkMessage> = suspendCancellableCoroutine { continuation ->
+
+    private var messages = mutableListOf<QuarkMessage>()
+
+    suspend fun updateConversation(conversationID: String, userFrom: String, body: String): List<QuarkMessage> = suspendCancellableCoroutine { continuation ->
         val conversationRef = firestore.collection("messages").document(conversationID)
         val subcollectionRef = conversationRef.collection("1")
 
-        subcollectionRef.get()
-            .addOnSuccessListener { documents ->
-                val messages = mutableListOf<QuarkMessage>()
-                for (document in documents) {
-                    val userFrom = document.getString("userFrom")
-                    val body = document.getString("Body")
-
-                    if (userFrom != null && body != null) {
-                        messages.add(QuarkMessage(userFrom, body))
-                    }
-                }
-
+        val newMessage = hashMapOf(
+            "Time" to FieldValue.serverTimestamp(),
+            "Body" to body,
+            "userFrom" to userFrom,
+        )
+        subcollectionRef.add(newMessage)
+            .addOnSuccessListener {
+                messages.add(QuarkMessage(userFrom, body))
                 continuation.resume(messages)
             }
             .addOnFailureListener { exception ->
                 continuation.resumeWithException(exception)
             }
+    }
+
+    suspend fun getUpdatedConversation(conversationID: String) = callbackFlow<List<QuarkMessage>> {
+        val conversationRef = firestore.collection("messages").document(conversationID)
+        val subcollectionRef = conversationRef.collection("1").orderBy("Time", Query.Direction.ASCENDING)
+
+        val listener = subcollectionRef.addSnapshotListener { snapshot, error ->
+            if (error != null) {
+                close(error)
+                return@addSnapshotListener
+            }
+
+            val newMessages = mutableListOf<QuarkMessage>() // Create a new list for storing messages
+
+            snapshot?.documents?.forEach { document ->
+                val userFrom = document.getString("userFrom")
+                val body = document.getString("Body")
+                if (userFrom != null && body != null) {
+                    newMessages.add(QuarkMessage(userFrom, body)) // Add new messages to the new list
+                }
+            }
+
+            trySend(newMessages).isSuccess // Send the new list of messages
+        }
+
+        awaitClose { listener.remove() }
     }
 }
 

@@ -32,10 +32,10 @@ import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -153,29 +153,51 @@ fun CenterAlignedTopAppBar(props: ChatProps) {
                 mutableStateOf("")
             }
 
-            var test by remember {
-                mutableIntStateOf(0)
+            var updated by remember {
+                mutableStateOf(false)
             }
 
-            fun sendMessage() {
-                test++ //variable to test moving to bottom of screen once message sent
+            var scroll by remember{
+                mutableStateOf(false)
             }
 
-            LaunchedEffect(key1 = props) {
-                messages = props.messages.getConversation(props.conversationID)
+            LaunchedEffect(props.conversationID) {
                 props.user.getUserProfileById(props.uid)?.let { user ->
                     currentUsername = user.username
                 }
+
+                val messagesFlow = props.messages.getUpdatedConversation(props.conversationID)
+                messagesFlow.collect { updatedMessages ->
+                    messages = updatedMessages
+                    scroll = true
+                }
+
             }
 
-            LaunchedEffect(key1 = test, key2 = messages) {
-                listState.animateScrollToItem(messages.size+200)
+            LaunchedEffect(key1 = scroll) {
+                if (scroll) {
+                    listState.animateScrollToItem(messages.size)
+                    scroll = false
+                }
+            }
+
+            LaunchedEffect(key1 = updated) {
+                if (updated) {
+                    props.messages.updateConversation(
+                        props.conversationID,
+                        props.uid,
+                        inputValue
+                    )
+                    inputValue = ""
+                    listState.animateScrollToItem(messages.size)
+                    updated = false
+                }
             }
 
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-            ){
+            ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -185,7 +207,11 @@ fun CenterAlignedTopAppBar(props: ChatProps) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .fillMaxHeight()
-                            .padding(it),
+                            .padding(it)
+                            .padding(
+                                start = 16.dp,
+                                end = 16.dp
+                            ),
                         verticalArrangement = Arrangement.spacedBy(10.dp),
                         state = listState
                     ) {
@@ -230,16 +256,20 @@ fun CenterAlignedTopAppBar(props: ChatProps) {
                 ) {
                     TextField(
                         modifier = Modifier
+                            .fillMaxWidth()
                             .weight(1f)
                             .focusRequester(focusRequester)
                             .onFocusChanged { textFieldFocused = it.isFocused },
                         value = inputValue,
                         onValueChange = { inputValue = it },
-                        shape = RoundedCornerShape(28.dp)
+                        shape = RoundedCornerShape(28.dp),
+                        maxLines = 3
                     )
                     Button(
-                        modifier = Modifier.height(56.dp),
-                        onClick = { sendMessage() },
+                        modifier = Modifier
+                            .height(56.dp)
+                            .align(Alignment.Bottom),
+                        onClick = { updated = true },
                         enabled = inputValue.isNotBlank()
                     ) {
                         Icon(
