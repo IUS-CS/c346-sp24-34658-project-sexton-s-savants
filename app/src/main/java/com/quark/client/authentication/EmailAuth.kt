@@ -3,7 +3,9 @@ package com.quark.client.authentication
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
+import kotlinx.coroutines.suspendCancellableCoroutine
 import java.util.regex.Pattern
+import kotlin.coroutines.resume
 
 /**
  * The email authentication service.
@@ -20,13 +22,13 @@ object EmailAuth {
      * @param onResult the callback to be called when the operation is complete.
      * onResult will be called with `AuthResult.Success` if the operation was successful, and `AuthResult.Failure` otherwise.
      */
-    fun createUser(email: String, password: String, onResult: (AuthResult) -> Unit) {
+    suspend fun createUser(email: String, password: String) = suspendCancellableCoroutine { continuation ->
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {task ->
                 if(task.isSuccessful) {
-                    onResult(AuthResult.Success)
+                    continuation.resume(AuthResult.Success)
                 } else {
-                  onResult(AuthResult.Failure)
+                  continuation.resume(AuthResult.Failure)
                 }
           }
     }
@@ -38,13 +40,13 @@ object EmailAuth {
      * @param onResult the callback to be called when the operation is complete.
      * onResult will be called with `AuthResult.Success` if the operation was successful, and `AuthResult.Failure` otherwise.
      */
-    fun authenticateUser(email: String, password: String, onResult: (AuthResult) -> Unit) {
+    suspend fun authenticateUser(email: String, password: String) = suspendCancellableCoroutine { continuation ->
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {task ->
                 if(task.isSuccessful) {
-                    onResult(AuthResult.Success)
+                    continuation.resume(AuthResult.Success)
                 } else {
-                    onResult(AuthResult.Failure)
+                    continuation.resume(AuthResult.Failure)
                 }
             }
     }

@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -19,6 +20,7 @@ import androidx.compose.ui.platform.LocalContext
 import com.quark.client.navigation.Screen
 import com.quark.client.authentication.AuthResult
 import com.quark.client.components.showErrorDialog
+import kotlinx.coroutines.launch
 
 data class SignUpProps(
     val navController: NavController,
@@ -31,9 +33,13 @@ fun SignUp(props: SignUpProps) {
     var email by remember {
         mutableStateOf("")
     }
+
     var password by remember {
         mutableStateOf("")
     }
+
+    val scope = rememberCoroutineScope()
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -76,14 +82,17 @@ fun SignUp(props: SignUpProps) {
                             "- Contains at least one special character"
                 )
             } else {
-                EmailAuth.createUser(email, password) {
-                    if (it == AuthResult.Success){
+                scope.launch {
+                    val result = EmailAuth.createUser(email, password)
+
+                    if (result == AuthResult.Success){
                         props.navController.navigate(Screen.Login.route)
                     } else {
                         showErrorDialog(context, "$email is already in use.")
                     }
                 }
             }
+
 
         }) {
             Text("Sign Up")

@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -19,6 +20,7 @@ import androidx.compose.ui.platform.LocalContext
 import com.quark.client.navigation.Screen
 import com.quark.client.authentication.AuthResult
 import com.quark.client.components.showErrorDialog
+import kotlinx.coroutines.launch
 
 data class LoginProps(
     val navController: NavController,
@@ -34,6 +36,9 @@ fun Login(props: LoginProps) {
     var password by remember {
         mutableStateOf("")
     }
+
+    val scope = rememberCoroutineScope()
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -66,10 +71,12 @@ fun Login(props: LoginProps) {
             if((email.isEmpty() || !EmailAuth.validateEmail(email)) || password.isEmpty()) {
                 showErrorDialog(context, "Please enter all fields correctly.")
             }else{
-                EmailAuth.authenticateUser(email, password){
-                    if (it == AuthResult.Success) {
+                scope.launch {
+                    val result = EmailAuth.authenticateUser(email, password)
+
+                    if (result == AuthResult.Success) {
                         props.navController.navigate(Screen.Home.route)
-                    } else if (it == AuthResult.Failure){
+                    } else if (result == AuthResult.Failure){
                         showErrorDialog(context, "Please check the entered credentials.")
                     }
                 }
